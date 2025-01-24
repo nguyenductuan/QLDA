@@ -1,0 +1,401 @@
+<div class="main-center" >
+  <div class="top-bar-header">
+    <div class="left-colum">
+      <div class="breadcrumbs">
+        <div class="breadcrumb-item cursor-default breadcrumb-route">
+          Trang chủ
+        </div>
+        <div class="separator">
+          <span class="separator-icon pi pi-chevron-right"></span>
+        </div>
+        <div class="breadcrumb-item cursor-default">
+          Người dùng
+        </div>
+      </div>
+      <div class="flex">
+        <div class="page-title">
+          Danh sách cá nhân
+        </div>
+      </div>
+    </div>
+    <div class="right-column">
+       <!-- code đến phần này -->
+      <div class="action-header">
+        <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+          type="button">
+          <span class="p-button-icon icon-menu-circle-vertical">
+          </span>
+        </button>
+
+        <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+          type="button">
+          <span class="p-button-icon icon-reload ">
+          </span>
+        </button>
+        <button class="p-buttons button" [routerLink]="'adduser'">Thêm mới</button>
+      </div>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="filter-item">
+      <div class="filter-container">
+        <div class="filter-default">
+          <div class="left">
+            <div style="width: 320px;">
+              <div class="form-container horizontal" style="width: 100%;">
+                <div class="input-container">
+                    <p class="w-full">
+                      <span class="p-icon-field p-icon-field-right">
+                        <app-search-input
+                        placeholder="Ký hiệu, trích yếu, ID văn bản"
+                        [maxLength]="200"
+                        (search)="onSearch($event)">
+                      </app-search-input>
+                      </span>
+                    </p>
+                </div>
+              </div>
+            </div>
+            <!-- Phân cách giữa các phần tử -->
+            <!-- <div class="wrap-divider">
+  <p-divider layout="vertical" class="p-element">
+    <div role="separator" aria-orientation="vertical" data-pc-name="divider"
+      class="p-divider p-component p-divider-vertical p-divider-solid p-divider-center">
+      <div class="p-divider-content">
+      </div>
+    </div>
+  </p-divider>
+</div> -->
+            <button
+              class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+              (click)="toggleAdvancedSearch()" type="button" data-pc-name="button" data-pc-section="root">
+              <span data-pc-section="icon" class="p-button-icon icon-filter-05"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="advanced-search expanded">
+      <div class="advanced-search-form" *ngIf="showAdvancedSearch">
+        <div class="collapse-container-content">
+          <div class="advanced-search-content">
+            <div class="advanced-search_title">
+              <div class="title">
+                Tìm kiếm nâng cao
+              </div>
+              <div class="close-container">
+                <i class="icon-direction-up-01"></i>
+              </div>
+            </div>
+            <div class="advanced-search-layout">
+
+              <div class="grid ng-star-inserted">
+                <form [formGroup]="searchForm" (ngSubmit)="search()">
+                  <input type="text" formControlName="name" class="form-control">
+
+                  <input type="text" formControlName="email" class="form-control">
+
+                </form>
+                <!--  <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Họ tên</label>
+                      </div>
+                      <div class="input-container">
+                        <div class="p-inputgroup">
+                          <p class="w-full">
+                            <span class="p-icon-field p-icon-field-right">
+                              <input type="text" [(ngModel)]="searchName" placeholder="Tìm kiếm theo tên" class="form-control">
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Họ tên</label>
+                      </div>
+                      <div class="input-container">
+                        <div class="p-inputgroup">
+                          <p class="w-full">
+                            <span class="p-icon-field p-icon-field-right">
+                              <input type="text" [(ngModel)]="searchEmail" placeholder="Tìm kiếm theo email" class="form-control">
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Số điện thoại</label>
+                      </div>
+                      <div class="input-container">
+                        <div class="p-inputgroup">
+                          <p class="w-full">
+                            <span class="p-icon-field p-icon-field-right">
+                              <input type="text" [(ngModel)]="searchPhone" placeholder="Tìm kiếm theo email" class="form-control">
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Địa chỉ</label>
+                      </div>
+                      <div class="input-container">
+                        <div class="p-inputgroup">
+                          <p class="w-full">
+                            <span class="p-icon-field p-icon-field-right">
+                              <input type="text" [(ngModel)]="searchAddress" placeholder="Tìm kiếm theo email" class="form-control">
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Thời gian</label>
+                      </div>
+                      <div class="input-container">
+                        <div class="p-inputgroup">
+                          <p class="w-full" style="width: 100% !important;">
+                            <span class=" p-calendar p-input-icon-right">
+                              <app-datepicker [(ngModel)]="selectedDate"></app-datepicker>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Phòng ban</label>
+                      </div>
+                      <div class="input-container">
+                        <p-dropdown [options]="listpositions" [(ngModel)]="searchPosition" [editable]="false"
+                          optionLabel="name" placeholder="Tất cả">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Trạng thái</label>
+                      </div>
+                      <div class="input-container">
+                        <p-dropdown [options]="statusOptions" [(ngModel)]="searchStatus" optionLabel="label" placeholder="Tất cả">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 field-item">
+                  <div class="vertical" style="width: 100%;">
+                    <div class="form-container ng-star-inserted" style="width: 100%;">
+                      <div class="form-label ng-star-inserted">
+                        <label class="label ng-star-inserted">Giới tính</label>
+                      </div>
+                      <div class="input-container">
+                        <select id="gender" formControlName="gender" class="form-control">
+                          <option value="1">Nam</option>
+                          <option value="0">Nữ</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+              </div>
+
+              <div class="row">
+                <button class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+                <button class="btn btn-secondary" (click)="resetSearch()">Đặt lại</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="table-container">
+    <table class="table-ds">
+      <thead>
+        <tr class="ng-star-inserted">
+          <th>
+            <div>
+              <input type="checkbox" (change)="toggleAll($event)" [checked]="allChecked">
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Họ tên</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Ngày sinh</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Ngày tạo</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Ngày cập nhật</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Địa chỉ</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Phòng ban</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Giới tính</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Số điện thoại</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Trạng thái</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Quyền</span>
+            </div>
+          </th>
+          <th>
+            <div>
+              <span class="text-line-table">Thao tác</span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="displayedUsers.length > 0; else noData">
+        <tr *ngFor="let user of displayedUsers">
+          <td>
+            <input type="checkbox" [(ngModel)]="user.selected" (change)="checkIfAllSelected()">
+          </td>
+          <td class="ng-star-inserted">{{user.name}}</td>
+          <td class="ng-star-inserted">{{user.birthday}}</td>
+          <td class="ng-star-inserted">{{user.createdate}}</td>
+          <td class="ng-star-inserted">{{user.updatedate}}</td>
+          <td class="ng-star-inserted">{{user.address}}</td>
+          <td class="ng-star-inserted">{{user.position}}</td>
+          <td class="ng-star-inserted">
+            {{user.gender ==1 ? 'Nam':'Nữ'}}
+          </td>
+          <td class="ng-star-inserted">{{user.phone}}</td>
+          <td class="ng-star-inserted">
+            {{user.status ==1 ? 'Hoạt động': 'Dừng hoạt động'}}
+          </td>
+          <td class="ng-star-inserted">{{user.role}}</td>
+          <td class="ng-star-inserted">
+            <div class="row-wrapper">
+              <div class="action-container flex ng-star-inserted">
+                <div class="p-element action-icon ng-star-inserted">
+
+                  <i class="icon-notes-edit-01" routerLink="edituser/{{user.employee_id}}"></i>
+                </div>
+                <div class="p-element action-icon ng-star-inserted">
+                  <span class="icon-view" (click)="openUserDetailDialog(user)"></span>
+
+                </div>
+                <div class="p-element action-icon ng-star-inserted">
+                  <span class="icon-trash-01" (click)="deleteuser(user.employee_id)"></span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+      <ng-template #noData>
+        <p>Không có dữ liệu</p>
+      </ng-template>
+    </table>
+
+    <div class="paginator-container" *ngIf="totalRecords > 0">
+      <div class="paginator-left">
+        <p-dropdown [(ngModel)]="pageSize" [options]="pageSizes" (onChange)="onPageSizeChange($event)">
+        </p-dropdown>
+        <label class="paginator-label">
+          Hiển thị {{startIndex + 1}}-{{endIndex}} trên {{totalRecords}}
+        </label>
+      </div>
+      <div class="paginator-right">
+        <div class="prev-icon page-action">
+          <button class="p-element page-action_btn p-button p-component" (click)="goToFirstPage()"
+            [disabled]="currentPage === 1">
+            <i class="icon-direction-left"></i>
+          </button>
+          <button class="p-element page-action_btn p-button p-component" (click)="goToPreviousPage()"
+            [disabled]="currentPage === 1">
+            <i class="icon-direction-left-01"></i>
+          </button>
+        </div>
+        <div class="list-pages">
+          <div style="width:48px;">
+            <div class="form-container horizontal ng-star-inserted" style="width: 100%;">
+              <div class="form-control no-label padding-bottom-0">
+                <input pInputText [(ngModel)]="currentPage" (keyup.enter)="onInputChange($event)" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="max-pages">
+          /{{totalPages}}
+        </div>
+        <div class="next-icon page-action">
+          <button class="p-element page-action_btn p-button p-component" (click)="goToNextPage()"
+            [disabled]="currentPage === totalPages">
+            <i class="icon-direction-right-01"></i>
+          </button>
+          <button class="p-element page-action_btn p-button p-component" (click)="goToLastPage()"
+            [disabled]="currentPage === totalPages">
+            <i class="icon-direction-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

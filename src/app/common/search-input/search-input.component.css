@@ -1,0 +1,31 @@
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+
+  .clear-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+
+    &:hover {
+      color: #495057;
+    }
+
+    i {
+      font-size: 12px;
+    }
+  }
+
+  input {
+    padding-right: 30px;
+  }
+}

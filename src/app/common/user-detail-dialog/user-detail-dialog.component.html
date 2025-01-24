@@ -1,0 +1,67 @@
+<div class="group-detail-dialog">
+  <div class="dialog-header" style="padding: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap:8px;">
+      <div class="header-title">Xem chi tiết nhóm</div>
+      <span><i class="pi pi-times"></i></span>
+    </div>
+  </div>
+  <div class="dialog-content">
+    <div class="dialog-content-header">
+      <div class="info-section">
+        <div class="title">Thông tin cá nhân</div>
+        <div class="info-grid">
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Họ tên</label>
+              <div class="info-value">{{a.name}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Ngày sinh</label>
+              <div class="info-value">{{a.birthday}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Giới tính</label>
+              <div class="info-value">{{a.gender === 1 ? 'Nam' : 'Nữ'}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Chức vụ</label>
+              <div class="info-value">{{a.position}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Quyền</label>
+              <div class="info-value">{{a.role}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Địa chỉ</label>
+              <div class="info-value">{{a.address}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Số điện thoại</label>
+              <div class="info-value">{{a.phone}}</div>
+            </div>
+          </div>
+          <div class="row-info col-6">
+            <div class="label-row-info">
+              <label>Trạng thái</label>
+              <div class="info-value">{{a.status === 1 ? 'Hoạt động' : 'Không hoạt động'}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer-action">
+        <button>Đóng</button>
+      </div>
+    </div>

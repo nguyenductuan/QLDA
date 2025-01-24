@@ -1,0 +1,18 @@
+<div class="search-input-wrapper">
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="searchValue"
+    [placeholder]="placeholder"
+    [maxLength]="maxLength"
+    (keyup.enter)="onSearch($event)"
+    class="p-inputtext-sm w-full">
+
+  <button
+    *ngIf="searchValue"
+    type="button"
+    class="clear-button"
+    (click)="clearSearch()">
+    <i class="pi pi-times"></i>
+  </button>
+</div>

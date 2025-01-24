@@ -1,0 +1,220 @@
+<div class="advanced-search expanded">
+  <div class="advanced-search-form">
+    <div class="collapse-container-content">
+      <div class="advanced-search-content">
+        <div class="advanced-search_title">
+
+          <div class="close-container">
+            <i class="icon-direction-up-01"></i>
+          </div>
+        </div>
+        <form [formGroup]="employeeForm" (ngSubmit)="create()">
+        <div class="advanced-search-layout">
+          <div class="grid ng-star-inserted">
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Email</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <input type="text"
+                            class="p-inputtext p-component p-element w-full no-clearable p-inputtext-sm ng-untouched ng-pristine ng-valid"
+                            tabindex="0" placeholder="Nhập họ và tên" maxlength="200"  formControlName="email">
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Họ và tên</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <input type="text"
+                            class="p-inputtext p-component p-element w-full no-clearable p-inputtext-sm ng-untouched ng-pristine ng-valid"
+                            tabindex="0" id="aIoqkp_code" placeholder="Nhập số điện thoại"   formControlName="name" maxlength="200">
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Ngày sinh</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <input style="width: 170px;" class="form-control" type="date" formControlName="birthday">
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Địa chỉ</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <input type="text"
+                          class="p-inputtext p-component p-element w-full no-clearable p-inputtext-sm ng-untouched ng-pristine ng-valid"
+                          tabindex="0" id="aIoqkp_code" placeholder="Nhập số điện thoại"   formControlName="address" maxlength="200">
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Số điện thoại</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <input type="text"
+                          class="p-inputtext p-component p-element w-full no-clearable p-inputtext-sm ng-untouched ng-pristine ng-valid"
+                          tabindex="0" id="aIoqkp_code" placeholder="Nhập số điện thoại"   formControlName="phone" maxlength="200">
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Chức vụ</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <select class="form-control" formControlName="position">
+                            <option *ngFor="let position of positionList" [value]="position.position_id">{{position.name}}</option>
+                          </select>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Quyền  hạn</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <select class="form-control" formControlName="role">
+                            <option *ngFor="let role of roleList" [value]="role.role_id">{{role.name}}</option>
+                          </select>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Trạng thái</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <select class="form-control" formControlName="status">
+                            <option  [value]="1">Hoat dong</option>
+                            <option  [value]="0">Dung hoat dong</option>
+                          </select>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-4 field-item">
+              <div class="vertical" style="width: 100%;">
+                <div class="form-container ng-star-inserted" style="width: 100%;">
+                  <div class="form-label ng-star-inserted">
+                    <label class="label ng-star-inserted">Giới tính</label>
+                  </div>
+                  <div class="input-container">
+                    <div class="p-inputgroup">
+                      <p class="w-full">
+                        <span class="p-icon-field p-icon-field-right">
+                          <select class="form-control" formControlName="gender">
+                            <option  [value]="1">Nam</option>
+                            <option  [value]="0">Nu</option>
+                          </select>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <div>
+                <button type="submit" [disabled]="employeeForm.invalid" style="width: 80px" class="btn btn-primary mr-2">Lưu</button>
+                <button class="btn btn-dark" routerLink="/employee" style="width: 80px">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+

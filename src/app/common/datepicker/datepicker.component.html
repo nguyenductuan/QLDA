@@ -1,0 +1,16 @@
+<div class="card flex" >
+  <p-calendar class = "calendar"
+        [(ngModel)]="selectedDates" showIcon
+        [style]="{'width': '328px'}"
+        [numberOfMonths]="2"
+        dateFormat="dd/mm/yy"
+        selectionMode="range"
+        [readonlyInput]="true"
+        (onSelect)="onDateSelect($event)">
+      </p-calendar>
+</div>
+
+
+
+
+
