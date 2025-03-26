@@ -1,0 +1,23 @@
+.home-main-cart{
+  margin-left: 15%;
+  margin-right: 15%; 
+}
+.cart-header{
+    border: solid 1px #ccc;
+    height: 30px;
+    width: 100%;
+}
+.carrt-main{
+    border: solid 1px #cccc;
+}
+
+img{
+    zoom: 0.2;
+}
+
+.text-right{
+  float: right;
+}
+.addproduct{
+  text-align: center;
+}

@@ -1,1 +1,17 @@
-<p>home works!</p>
+<nav class="navbar navbar-expand-sm bg-light header">
+  <div class="header-left">Trang chủ</div>
+  <div class="header-left">
+    <div class="header-right flex">
+      <div class="user-info flex">
+        <div class="cart"> 
+          <a class="nav-link" routerLink="/home/cart"> Giỏ hàng<i class="fas fa-shopping-cart" routerLink="cart">{{sum}}</i></a></div>
+        <img src="https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg" alt="avatar" width="32" height="32" class="avatar">
+        <div class="name-title">
+          <div class="name">{{user}}</div>
+          <div class="title"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

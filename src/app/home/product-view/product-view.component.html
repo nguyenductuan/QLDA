@@ -1,0 +1,28 @@
+
+<div class="home-main">
+    <div class="home-left">
+        Danh mục sản phẩm
+    </div>
+    <div class="home-right">
+<div class="product"*ngIf="products">
+    <div class="image">
+        <img src="https://cdnv2.tgdd.vn/mwg-static/dmx/Products/Images/1942/325310/google-tivi-sony-4k-65-inch-k-65s30-1-638689098054628599-700x467.jpg" 
+      alt="Mô tả ảnh">
+    </div>
+    <div>
+     Tên sản phẩm: {{ products.name }}
+      </div>
+      <div>
+        Giá: {{ products.price }}
+      </div>
+      <div class="quantity" >
+        Sl: <button  (click)="decrement()" class="quantity-btn">-</button>
+        <input type="text" [(ngModel)]="quantity" class="quantity" [min]="1" />
+        <button  (click)="increment()" class="quantity-btn" >+</button>
+      </div>
+      <div><button (click)="addToCart(products.product_id)">Thêm vào giỏ</button></div>
+      <div><button>Mua ngay</button></div>
+      <!-- <button (click)="addToCart(product)">Mua ngay</button> -->
+</div>
+    </div>
+</div>

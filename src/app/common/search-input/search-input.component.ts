@@ -1,23 +1,24 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+// import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-@Component({
-  selector: 'app-search-input',
-  templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.css'
-})
-export class SearchInputComponent {
-  @Input() placeholder = '';
-  @Input() maxLength = 200;
-  @Output() search = new EventEmitter<string>();
+// @Component({
+//   selector: 'app-search-input',
+//   templateUrl: './search-input.component.html',
+//   styleUrl: './search-input.component.css'
+// })
+// export class SearchInputComponent {
+//   @Input() placeholder = '';
+//   @Input() maxLength = 200;
 
-  searchValue = '';
 
-  onSearch(event: any) {
-    this.search.emit(this.searchValue);
-  }
+//   @Output() search = new EventEmitter<string>();
 
-  clearSearch() {
-    this.searchValue = '';
-    this.search.emit(this.searchValue);
-  }
-}
+//   searchValue = '';
+
+//   onSearch(event: any) {
+//     this.search.emit(this.searchValue);
+//   }
+//   clearSearch() {
+//     this.searchValue = '';
+//     this.search.emit(this.searchValue);
+//   }
+// }

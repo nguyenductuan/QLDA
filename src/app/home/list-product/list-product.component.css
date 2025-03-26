@@ -1,0 +1,32 @@
+.home-main-product{
+    margin-left: 15%;
+    margin-right: 15%; 
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+     justify-content: space-between;
+     
+}
+.home-right{
+margin-left: 15%;
+margin-right: 15%;
+display: flex;
+flex-wrap: wrap;
+}
+.product{
+    width: 32%;
+    margin-right: 1.1%;
+    margin-top: 1%;
+    height:auto;
+    border: solid 1px #cccccc;
+}
+.image{
+    width: 85%; height: 100px;   
+}
+.product-actions{
+    display: flex; margin-bottom:20px;margin-top: 20px;
+}
+.space-x{
+    margin: 0 5px;
+}
+

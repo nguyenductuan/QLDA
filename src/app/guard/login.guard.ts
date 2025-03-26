@@ -16,7 +16,8 @@ export class LoginGuard implements CanActivate{
       this.isLogin= this.app.checklogin();
 
      let user = this.isLogin.name;
-      if(!user){
+      if(!user)
+      {
       this.router.navigate(['/account/login'])
         return of(false)
       }

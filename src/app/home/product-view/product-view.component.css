@@ -1,0 +1,42 @@
+.home-main{
+    display: flex;
+
+}
+.home-left{
+width: 15%;
+border: solid 1px #ccc ;
+height: 550px;
+}
+.home-right{
+width: 85%;
+height: 550px;
+display: flex;
+  flex-wrap: wrap;
+}
+.product{
+    width: 25%;
+    border: solid 1px #cccccc; height: 200px; flex: 0 0 auto;
+   padding: 8px;
+   width: 25%;
+}
+.image{
+    width: 85%; height: 100px;   
+}
+img{
+    zoom: 0.2;
+}
+.quantity{
+     display: flex;
+    align-items: center;
+    width: 40px;
+    margin: 0 10px;}
+.quantity-btn{
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+  

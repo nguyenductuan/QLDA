@@ -1,0 +1,55 @@
+<div class="home-main-cart">
+      <div class="cart-header">
+        <h3>Giỏ Hàng</h3>
+        </div>
+
+        <div class="carrt-main">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"> <input type="checkbox"></th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of listcart">
+                <th scope="row"> <input type="checkbox" [(ngModel)]="p.selected"  (change)="toggleSelection(p.product.product_id, $event)" 
+                  [checked]="selectedProductIds.includes(p.product.product_id)">
+               </th>
+                <td>
+                  <img src="https://cdnv2.tgdd.vn/mwg-static/dmx/Products/Images/1942/325310/google-tivi-sony-4k-65-inch-k-65s30-1-638689098054628599-700x467.jpg">
+                  {{p.product.name}}</td>
+                  <td>{{p.product.price}}</td>
+                  <td><button (click) ="decrement(p.product.product_id,p.quantity,p.employee.employee_id)" class="quantity-btn">-</button>
+                    <input type="text" [(ngModel)]="p.quantity" class="quantity" [min]="1" style="width: 50px;" />
+                    <button  (click)="increment(p.product.product_id,p.quantity,p.employee.employee_id)" class="quantity-btn" >+</button></td>
+                  <td>{{p.product.price * p.quantity }}</td>
+                  <td> <span class="fas fa-trash" (click)="deleteproduct(p.product.product_id)"></span></td>
+              </tr>
+             
+            </tbody>
+          </table>
+        <div class="disscoutprice">
+            <label for="discount">Chọn mã giảm giá:</label>
+            <select id="discount"
+             [(ngModel)]="selectedDiscount">
+              <option value="" disabled selected>Chọn mã giảm giá</option>
+              <option *ngFor="let discount of discountCodes" [value]="discount.discountPercentage">
+                {{ discount.discountname}} -  {{discount.discountPercentage}}
+              </option>
+            </select>
+            <button (click)="applyDiscount()">Áp dụng</button>
+        </div>
+        <div class="text-right">
+          <h4>Tổng cộng:{{total}}</h4>
+        </div>
+        <div class="addproduct">
+          <button (click)="checkout()">Đặt hàng</button>
+        </div>
+      </div>
+  
+  </div>

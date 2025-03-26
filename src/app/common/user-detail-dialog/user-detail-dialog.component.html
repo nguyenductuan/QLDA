@@ -1,8 +1,8 @@
 <div class="group-detail-dialog">
   <div class="dialog-header" style="padding: 24px;">
     <div style="display: flex; justify-content: space-between; align-items: center; gap:8px;">
-      <div class="header-title">Xem chi tiết nhóm</div>
-      <span><i class="pi pi-times"></i></span>
+      <div class="header-title">Xem chi tiết cá nhân</div>
+      <span><i class="pi pi-times" (click)="closeDialog()"></i></span>
     </div>
   </div>
   <div class="dialog-content">
@@ -62,6 +62,6 @@
 
       </div>
       <div class="footer-action">
-        <button>Đóng</button>
+        <button (click)="closeDialog()">Đóng</button>
       </div>
     </div>

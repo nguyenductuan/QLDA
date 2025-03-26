@@ -1,0 +1,334 @@
+<div style=" max-height: 100%;overflow-y: auto;">
+    <div class="top-bar-header">
+        <div class="left-colum">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item cursor-default breadcrumb-route">
+              Trang chủ
+            </div>
+            <div class="separator">
+              <span class="separator-icon pi pi-chevron-right"></span>
+            </div>
+            <div class="breadcrumb-item cursor-default">
+              Người dùng
+            </div>
+          </div>
+          <div class="flex">
+            <div class="page-title">
+              Danh sách cá nhân
+            </div>
+          </div>
+        </div>
+        <div class="right-column">
+          <!-- code đến phần này -->
+          <div class="action-header">
+            <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+              type="button">
+              <span class="fas fa-file-export">
+              </span>
+            </button>
+    
+            <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+              type="button">
+              <span class="fas fa-sync-alt ">
+              </span>
+            </button>
+            <button class="p-buttons button" [routerLink]="'adduser'">Thêm mới</button>
+          </div>
+        </div>
+      </div>
+<!-- Form Tìm kiếm -->
+      <div class="advanced-search expanded">
+        <div class="advanced-search-form">
+          <div class="collapse-container-content">
+            <div class="advanced-search-content">
+              <div class="advanced-search_title">
+                <div class="title">
+               
+                </div>
+                <div class="close-container">
+                  <i class="icon-direction-up-01"></i>
+                </div>
+              </div>
+              <div class="advanced-search-layout">
+                <form [formGroup]="searchForm" (ngSubmit)="searchadvance()" class="grid">
+                  <div class="col-4">
+                    <label for="">Họ và tên</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <i class="pi pi-times cursor-pointer" (click)="clearInput('name')"
+                              *ngIf="searchForm.get('name')?.value">
+                            </i>
+                            <input pInputText formControlName="name" class="form-control">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Chức vụ</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <p-dropdown [options]="listpositions" [(ngModel)]="selectedPosition"
+                              [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="position_id"
+                              placeholder="Chọn chức vụ"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Địa chỉ</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <i class="pi pi-times cursor-pointer" (click)="clearInput('address')"
+                              *ngIf="searchForm.get('adđress')?.value">
+                            </i>
+                            <input pInputText formControlName="address" class="form-control">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Số điện thoại</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <i class="pi pi-times cursor-pointer" (click)="clearInput('phone')"
+                              *ngIf="searchForm.get('phone')?.value">
+                            </i>
+                            <input pInputText formControlName="phone" class="form-control">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Giới tính</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <p-dropdown [options]="genderOptions" [(ngModel)]="selectedGender"
+                              [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                              placeholder="Chọn giới tính"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Trạng thái</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+                              [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                              placeholder="Chọn trạng thái"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Thời gian</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <app-datepicker [defaultDates]="dateRange" (dateSelect)="onDateSelect($event)"
+                              [key]="datePickerKey" style="height: 22px;"></app-datepicker>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Quyền</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                            <p-dropdown [options]="listrole" [(ngModel)]="selectedrole"
+                              [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="role_id"
+                              placeholder="Chọn quyền"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                  <button class="btn btn-primary" (click)="searchadvance()">Tìm kiếm</button>
+                  <button class="btn btn-secondary" (click)="resetSearch()">Đặt lại</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table-ds">
+          <thead>
+            <tr class="ng-star-inserted">
+              <th>
+                <div>
+                  <input type="checkbox" (change)="toggleAll($event)" [checked]="allChecked">
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Họ tên</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Ngày sinh</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Ngày tạo</span>
+                </div>
+              </th>
+  
+              <th>
+                <div>
+                  <span class="text-line-table">Địa chỉ</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Phòng ban</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Giới tính</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Số điện thoại</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Trạng thái</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Quyền</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="text-line-table">Thao tác</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="displayedUsers.length > 0; else noData">
+            <tr *ngFor="let user of displayedUsers">
+              <td>
+                <input type="checkbox" [(ngModel)]="user.selected" (change)="checkIfAllSelected()">
+              </td>
+              <td class="ng-star-inserted">{{user.name}}</td>
+              <td class="ng-star-inserted">{{user.birthday | date:'dd/MM/yyyy'}}</td>
+              <td class="ng-star-inserted">{{user.createdate}}</td>
+  
+              <td class="ng-star-inserted">{{user.address}}</td>
+              <td class="ng-star-inserted">{{user.position}}</td>
+              <td class="ng-star-inserted">
+                {{user.gender ==1 ? 'Nam':'Nữ'}}
+              </td>
+              <td class="ng-star-inserted">{{user.phone}}</td>
+              <td class="ng-star-inserted">
+                {{user.status ==1 ? 'Hoạt động': 'Dừng hoạt động'}}
+              </td>
+              <td class="ng-star-inserted">{{user.role}}</td>
+              <td class="ng-star-inserted">
+                <div class="row-wrapper">      
+                  <div class="action-container flex ng-star-inserted">
+                    <div class="p-element action-icon ng-star-inserted">
+  
+                      <i class="fas fa-edit" routerLink="edituser/{{user.employeeId}}"></i>
+                    </div>
+                    <div class="p-element action-icon ng-star-inserted">
+                      <span class="fas fa-eye" (click)="openUserDetailDialog(user)"></span>
+  
+                    </div>
+                    <div class="p-element action-icon ng-star-inserted">
+                      <span class="fas fa-trash" (click)="deleteuser(user.employeeId)"></span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <ng-template #noData>
+            <p>Không có dữ liệu</p>
+          </ng-template>
+        </table>
+  
+        <div class="paginator-container" *ngIf="totalRecords > 0">
+          <div class="paginator-left">
+            <p-dropdown [(ngModel)]="pageSize" [options]="pageSizes" (onChange)="onPageSizeChange($event)">
+            </p-dropdown>
+            <label class="paginator-label">
+              Hiển thị {{startIndex + 1}}-{{endIndex}} trên {{totalRecords}}
+            </label>
+          </div>
+          <div class="paginator-right">
+            <div class="prev-icon page-action">
+              <button class="p-element page-action_btn p-button p-component" (click)="goToFirstPage()"
+                [disabled]="currentPage === 1">
+                <i class="fas fa-angle-double-left"></i>
+              </button>
+              <button class="p-element page-action_btn p-button p-component" (click)="goToPreviousPage()"
+                [disabled]="currentPage === 1">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+            </div>
+            <div class="list-pages">
+              <div style="width:48px;">
+                <div class="form-container horizontal" style="width: 100%;">
+                  <div class="">
+                    <input pInputText [(ngModel)]="currentPage" (keyup.enter)="onInputChange($event)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-pages">
+              /{{totalPages}}
+            </div>
+            <div class="next-icon page-action">
+              <button class="p-element page-action_btn p-button p-component" (click)="goToNextPage()"
+                [disabled]="currentPage === totalPages">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button class="p-element page-action_btn p-button p-component" (click)="goToLastPage()"
+                [disabled]="currentPage === totalPages">
+                <i class="fas fa-angle-double-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

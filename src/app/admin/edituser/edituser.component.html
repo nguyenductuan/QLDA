@@ -1,0 +1,171 @@
+<div class="main-center">
+    <div class="top-bar-header">
+      <div class="left-colum">
+        <div class="breadcrumbs">
+          <div class="breadcrumb-item cursor-default breadcrumb-route">
+            Trang chủ
+          </div>
+          <div class="separator">
+            <span class="separator-icon pi pi-chevron-right"></span>
+          </div>
+          <div class="breadcrumb-item cursor-default">
+            Người dùng
+          </div>
+        </div>
+        <div class="flex">
+          <div class="page-title">
+            Chỉnh sửa cá nhân
+          </div>
+        </div>
+      </div>
+     
+      <div class="right-column">
+        <!-- code đến phần này -->
+        <div class="action-header">
+          <button class="p-buttons button" (click)="editUser()">Cập nhật</button>
+        </div>
+      </div>
+    </div>
+    <div class="main-content" style="display: flex;">
+      <form [formGroup]="editUserForm" class="grid ng-pristine ng-valid ng-touched">
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Họ và tên</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                           
+                            <input pInputText formControlName="name" class="form-control" id="name">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Email</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                           
+                            <input pInputText formControlName="email" class="form-control">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Số điện thoại</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                       
+                            <input pInputText formControlName="phone" class="form-control" id="name">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Địa chỉ</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                          
+                            <input pInputText formControlName="address" class="form-control" id="name">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Mật khẩu</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                           
+                            <input pInputText formControlName="password" class="form-control" id="name">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Ngày sinh</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                          
+                            <input pInputText formControlName="password" class="form-control" id="name">
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Trạng thái</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <select id="status" formControlName="status" class="form-control">
+                            <option value="1">Hoạt động</option>
+                            <option value="0">Dứng hoạt động</option>
+                          </select>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Chức vụ</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                           
+                            <select class="form-control" formControlName="position" class="form-control">
+          
+                              <option *ngFor="let position of positionList" [value]="position.position_id">
+                                {{position.name}}
+                              </option>
+                            </select>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Quyền</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class=" p-calendar p-input-icon-right">
+                           
+                            <select class="form-control" formControlName="role" id="role">
+                              <option *ngFor="let role of roleList" [value]="role.role_id">
+                                {{role.name}}</option>
+                            </select>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="width: 30%;">
+                    <label for="">Giới tính</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <select id="gender" formControlName="gender" class="form-control">
+                            <option value="1">Nam</option>
+                            <option value="0">Nữ</option>
+                          </select>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+    </div>
+  

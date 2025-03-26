@@ -1,41 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-      <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-isLoggedIncenter" style="text-align: center;"> Đăng Nhập</h5>
-          <form [formGroup]="formLogin" (ngSubmit)="login()">
-            <div class="form-group row mt-3">
-              <div class="col-4">
-                <label for="tenvac-xin" class="mr-3">Họ và tên <span style="color: red">*</span></label>
-              </div>
-              <div class="col-8">
-                <input type="text" id="email" class="form-control" formControlName="email">
 
-              </div>
-            </div>
-            <div class="form-group row mt-3">
-              <div class="col-4">
-                <label for="tenvac-xin" class="mr-3">Mật khẩu <span style="color: red">*</span></label>
-              </div>
-              <div class="col-8">
-                <input type="text" id="password" class="form-control" formControlName="password">
+<div class="login-container">
+  <h2>Đăng nhập</h2>
 
-              </div>
-            </div>
-            <div style="float: right;">
-              <p><a href="" routerLink="/reset-password" data-dismiss="modal">Quên mật khẩu ?</a></p>
-            </div>
-            <div style="margin-top: 35px; text-align: center;">
-              <div style="float: right;gap:7px; display: flex; justify-content: flex-end;">
-                <button class="btn btn-success mt-2" style="color:black; background: white;"
-                >Đăng nhập</button>
-                <button class="btn btn-success mt-2" type="submit" style="color: white; background: red;">Đăng ký</button>
-              </div>
-            </div>
-          </form>
-        </div>
+  <form [formGroup]="formLogin" (ngSubmit)="login()" class="loginForm">
+    <div class="form-group">
+      <label for="username">Email</label>
+      <input type="text" id="email" class="form-control" formControlName="email">
+      <div *ngIf="formLogin.get('email')?.touched && formLogin.get('email')?.hasError('required')">
+        <small style="color: red;">Username is required!</small>
       </div>
     </div>
+    <div class="form-group">
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" class="form-control" formControlName ="password" required />
+      <div *ngIf="formLogin.get('password')?.touched && formLogin.get('password')?.hasError('required')">
+        <small style="color: red;">Password is required!</small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="formLogin.invalid" >Đăng nhập</button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
   </div>
 </div>

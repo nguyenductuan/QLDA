@@ -1,0 +1,131 @@
+<div class="main-center">
+    <div class="top-bar-header">
+      <div class="left-colum">
+        <div class="breadcrumbs">
+          <div class="breadcrumb-item cursor-default breadcrumb-route">
+            Trang chủ
+          </div>
+          <div class="separator">
+            <span class="separator-icon pi pi-chevron-right"></span>
+          </div>
+          <div class="breadcrumb-item cursor-default">
+            Người dùng
+          </div>
+        </div>
+        <div class="flex">
+          <div class="page-title">
+            Thêm mới cá nhân
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="action-header">
+          <button class="p-buttons button" (click)="createproduct()">Thêm mới</button>
+        </div>
+      </div>
+    </div>
+    <div class="main-content" style="display: flex;">
+      <form [formGroup]="addproduct">
+        <div class="advanced-search-layout">
+          <div class="grid ng-star-inserted">
+            <div class="col-4">
+              <label for="">Tên sản phẩm</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">
+                      <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('name')"
+                        *ngIf="searchForm.get('name')?.value">
+                      </i> -->
+                      <input pInputText formControlName="name" class="form-control">
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="">Nhóm sản phẩm</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">
+                      <p-dropdown [options]="categorylist" [(ngModel)]="selectedcategory"
+                        [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="category_id"
+                        placeholder="Chọn nhóm sp"
+                        [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                      </p-dropdown>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="">Giá</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">
+                      <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('address')"
+                        *ngIf="searchForm.get('address')?.value">
+                      </i> -->
+                      <input pInputText formControlName="price" class="form-control">
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="">Số lượng</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">
+                      <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('address')"
+                        *ngIf="searchForm.get('address')?.value">
+                      </i> -->
+                      <input pInputText formControlName="quantity" class="form-control">
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="">Ảnh sản phẩm</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">             
+<input type="file" (change)="onFileSelected($event)" accept="image/*">
+<img *ngIf="imageUrl" [src]="imageUrl" alt="Ảnh đã chọn" width="200">
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+       
+            <div class="col-4">
+              <label for="">Trạng thái</label>
+              <div class="">
+                <div class="">
+                  <p class="">
+                    <span class="">
+                      <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+                        [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                        placeholder="Chọn trạng thái"
+                        [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                      </p-dropdown>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+       
+     
+            <div class="d-flex justify-content-end">
+            </div>
+          </div>
+        </div>
+      </form>
+  
+  
+    </div>

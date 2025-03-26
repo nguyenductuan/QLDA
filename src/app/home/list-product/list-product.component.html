@@ -1,0 +1,32 @@
+<div class="home-main">
+  <div class="home-main-product">
+    <div>
+    </div>
+    <div>
+    <input type="text" placeholder="Nhập từ tìm kiếm">
+</div>
+  </div>
+  <div class="home-right">
+    <div class="product" *ngFor="let product of products">
+        <img src="http://localhost:8080/product/images/{{product.thumbnail}}" 
+        style="height: auto;width: 100%;" alt="Mô tả ảnh">
+      <h3 routerLink="productview/{{product.product_id}}">{{ product.name }}</h3>
+      <p>Bảo hành 12 tháng</p>
+     <p class="product-price"> Giá: {{ product.price }}</p>
+      <div class="product-actions">
+       <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+       <span class="space-x"></span>
+       <button class="btn btn-success">Mua hàng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
