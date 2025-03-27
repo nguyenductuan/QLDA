@@ -40,7 +40,8 @@ onFileSelected(event: any) {
       {
         name: new FormControl(''),
         price: new FormControl(''),
-        quantity: new FormControl(''),
+        quantity: new FormControl('')
+        
        
       }
     )
@@ -60,16 +61,16 @@ this.category.listcategorys().subscribe(
   }
   addproducts:any;
   id:any;
+ 
   createproduct(){
-    const formData = new FormData();
-    formData.append('name', this.addproduct.value.name);
-    formData.append('quantity', this.addproduct.value.quantity);
-    formData.append('price', this.addproduct.value.price);
-    formData.append('category_id', this.selectedcategory);
-      formData.append('avatarImage', this.file);
-    
-    
-this.product.addproduct(formData).subscribe({
+  const productData = {
+    name: this.addproduct.value.name,
+    categoryid: this.selectedcategory, 
+    price: this.addproduct.value.price,
+    quantity: this.addproduct.value.quantity,
+    image: this.file
+  };
+this.product.addproduct(productData).subscribe({
   next:(data)=>{ 
     console.log(data);
     },

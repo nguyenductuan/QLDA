@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProductsService } from '../../service/products.service';
+import { CategoryService } from '../../service/category.service';
 
 @Component({
   selector: 'app-editproduct',
@@ -13,13 +14,26 @@ export class EditproductComponent implements OnInit {
   constructor( private fb: FormBuilder, 
     private route: ActivatedRoute,
     private router: Router,
-    private product: ProductsService
+    private product: ProductsService,
+    private category: CategoryService
   ){}
   product_id: any ;
+  categorylist:any;
 editProductForm: FormGroup;
+selectedcategory:any;
   ngOnInit(): void {
 this.product_id =  this.route.snapshot.paramMap.get('id');
-
+this.category.listcategorys().subscribe(
+  {
+    next:(data) => {
+      this.categorylist = data;
+      console.log(this.categorylist)
+    },
+    error:(err) => {
+      console.error('Lỗi khi lấy danh sách sản phẩm:', err);
+    }
+  }
+)
     this.editProductForm = this.fb.group({
       name: [''],
       price: [''],
@@ -30,13 +44,30 @@ this.product_id =  this.route.snapshot.paramMap.get('id');
   console.log(product);
   this.editProductForm.patchValue({
         ...product,
+       categoryId:product.categoryId
        // imageUrl: product.thumbnail
       });
  })
 
   }
   editProduct(){
-   
+    const productData = {
+      name: this.editProductForm.value.name,
+      categoryid: this.selectedcategory, 
+      price: this.editProductForm.value.price,
+      quantity: this.editProductForm.value.quantity,
+      image: this.file
+    };
+             this.product.update(productData,this.product_id).subscribe({
+            next:(response)=>{
+console.log(response)
+            },
+            error:(err)=>{
+              console.log("Lỗi");
+            }
+            })
+             
+      
     // const dialogRef = this.dialog.open(ConfirmationDialogEditComponent);
 
     // dialogRef.afterClosed().subscribe(result => {

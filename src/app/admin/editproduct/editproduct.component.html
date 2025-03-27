@@ -65,6 +65,22 @@
                 </div>
             </div>
             <div class="col-4">
+                <label for="">Nhóm sản phẩm</label>
+                <div class="">
+                  <div class="">
+                    <p class="">
+                      <span class="">
+                        <p-dropdown [options]="categorylist" [(ngModel)]="selectedcategory"
+                          [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="categoryId"
+                          placeholder="Chọn nhóm sp"
+                          [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                        </p-dropdown>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <div class="col-4">
                 <label for="">Ảnh sản phẩm</label>
                 <div class="">
                     <div class="">

@@ -128,7 +128,7 @@
                            
                             <select class="form-control" formControlName="position" class="form-control">
           
-                              <option *ngFor="let position of positionList" [value]="position.position_id">
+                              <option *ngFor="let position of positionList" [value]="position.positionId">
                                 {{position.name}}
                               </option>
                             </select>
@@ -145,7 +145,7 @@
                           <span class=" p-calendar p-input-icon-right">
                            
                             <select class="form-control" formControlName="role" id="role">
-                              <option *ngFor="let role of roleList" [value]="role.role_id">
+                              <option *ngFor="let role of roleList" [value]="role.roleid">
                                 {{role.name}}</option>
                             </select>
                           </span>
