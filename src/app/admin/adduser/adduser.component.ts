@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogComponent } from '../../common/confirmation-dialog/confirmation-dialog.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PositionService } from '../../service/position.service';
 import { UserService } from '../../service/user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AdduserComponent implements OnInit {
 
-  searchForm: FormGroup;
+  addemployee: FormGroup;
   public check = false;
   public checkPhoneDuplicate = false;
   positionList:any;
@@ -28,13 +28,14 @@ export class AdduserComponent implements OnInit {
   selectedPosition:any;
   userParams:any;
   numberValue: string;
+  submitted = false;// Biến kiểm tra người dùng đã submit chưa
 
   constructor( private employeeService: UserService,
     private snackBar: MatSnackBar,
     private positionService:PositionService,
     private roleService:RoleService,
     private router:Router,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,private fb: FormBuilder) { }
      
   ngOnInit(){
     this.positionService.listposition().subscribe((data: any) => {
@@ -46,18 +47,22 @@ export class AdduserComponent implements OnInit {
       console.log(this.listrole)
     }
     )
-  this.searchForm = new FormGroup(
+  this.addemployee =this.fb.group(
     {
-        name: new FormControl(''),
-        position: new FormControl(''),
-        role: new FormControl(''),
-        address: new FormControl(''),
-        phone: new FormControl(''),
-        birthday: new FormControl(''),
-        email:new FormControl(''),
-        password: new FormControl('')
+        name: ['',[Validators.required]],
+        position: ['',[Validators.required]],
+        address: ['',[Validators.required]],
+        email: ['', [Validators.required,Validators.email]],
+        phone:['',[Validators.required, Validators.pattern("^[0-9]{10,11}$")]],
+        role:['',Validators.required],
+        password: ['',[Validators.required]],
+        gender:['',[Validators.required]],
+        status: ['',[Validators.required]],
+        birthday: ['',[Validators.required]],
+      
     }
   )
+  
 }
 statusOptions: any= [
   { label: 'Hoạt động', value: 1 },
@@ -68,27 +73,31 @@ genderOptions: any[] = [
   { label: 'Nữ', value: 0 }
 ];
 clearInput(controlName: string) {
-  this.searchForm.get(controlName)?.reset();
+  this.addemployee.get(controlName)?.reset();
 }
   create(){
     this.userParams = {
-      ...this.searchForm.value,
+      ...this.addemployee.value,
       role: this.selectedrole,
       position: this.selectedPosition,
       gender: this.selectedGender,
       status: this.selectedStatus
     };
+    this.submitted = true;
+    if (this.addemployee.valid){
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
        if (result) {
-        //  if (this.employeeForm.valid) {
            this.employeeService.addUser(this.userParams).subscribe((data: any) => {
-            this.snackBar.open("Thành công", 'Đóng', {
+            this.snackBar.open(data.message, 'Đóng', {
               duration: 3000,
               horizontalPosition: 'right',
               verticalPosition: 'top'
             });
-             this.router.navigate(['/admin']);
+            if(data.status ==200){
+              this.router.navigate(['/admin']);
+            }
+             
           }, error => {
             this.snackBar.open(error.error.message, 'Đóng', {
               duration: 3000,
@@ -98,6 +107,11 @@ clearInput(controlName: string) {
           });
        }
      });
+    }
+    else{
+      return; // Nếu form không hợp lệ thì không submit
+    }
+    
     }
   onInput(event:any) {
     const input = event.target as HTMLInputElement;

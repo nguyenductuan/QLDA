@@ -72,7 +72,6 @@ export class EdituserComponent {
 
   editUser(){
     // if (this.editUserForm.valid)
-
     const dialogRef = this.dialog.open(ConfirmationDialogEditComponent);
 
     dialogRef.afterClosed().subscribe(result => {

@@ -22,8 +22,8 @@
           <!-- code đến phần này -->
           <div class="action-header">
             <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
-              type="button">
-              <span class="fas fa-file-export">
+              type="button" (click) ="export()">
+              <span class="fas fa-file-export" >
               </span>
             </button>
     
@@ -199,6 +199,11 @@
               </th>
               <th>
                 <div>
+                  <span class="text-line-table">Email</span>
+                </div>
+              </th>
+              <th>
+                <div>
                   <span class="text-line-table">Ngày sinh</span>
                 </div>
               </th>
@@ -251,8 +256,9 @@
                 <input type="checkbox" [(ngModel)]="user.selected" (change)="checkIfAllSelected()">
               </td>
               <td class="ng-star-inserted">{{user.name}}</td>
+              <td class="ng-star-inserted">{{user.email}}</td>
               <td class="ng-star-inserted">{{user.birthday | date:'dd/MM/yyyy'}}</td>
-              <td class="ng-star-inserted">{{user.createdate}}</td>
+              <td class="ng-star-inserted">{{user.createdate | date:'dd/MM/yyyy'}}</td>
   
               <td class="ng-star-inserted">{{user.address}}</td>
               <td class="ng-star-inserted">{{user.position}}</td>

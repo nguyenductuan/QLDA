@@ -48,4 +48,7 @@ export class UserService {
   deleteUser(id: any): Observable<any> {
     return this.http.delete(api + '/delete-employee/' + id);
   }
+  export():Observable<Blob>{
+return this.http.get(api+ '/employee/export-excel',{ responseType: 'blob' });
+  }
 }
