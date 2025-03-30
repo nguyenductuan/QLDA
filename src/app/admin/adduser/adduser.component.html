@@ -52,12 +52,12 @@
                 <p class="">
                   <span class="">
                     <p-dropdown [options]="listpositions" [(ngModel)]="selectedPosition"
-                      [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="positionId"
+                    formControlName="position" optionLabel="name" optionValue="positionId"
                       placeholder="Chọn chức vụ"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
                     <div *ngIf="submitted && !selectedPosition" class="text-danger">
-                      <span>Trạng thái là bắt buộc.</span> 
+                      <span>Chức vụ là bắt buộc.</span> 
                     </div> 
                   </span>
                 </p>
@@ -135,7 +135,7 @@
                 <p class="w-full">
                   <span class="">
                     <p-dropdown [options]="genderOptions" [(ngModel)]="selectedGender"
-                      [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                    formControlName="gender" optionLabel="label" optionValue="value"
                       placeholder="Chọn giới tính"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
@@ -154,7 +154,7 @@
                 <p class="">
                   <span class="">
                     <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
-                      [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                    formControlName="status" optionLabel="label" optionValue="value"
                       placeholder="Chọn trạng thái"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
@@ -188,7 +188,7 @@
                 <p class="w-full">
                   <span class="">
                     <p-dropdown [options]="listrole" [(ngModel)]="selectedrole"
-                      [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="roleid"
+                    formControlName="role" optionLabel="name" optionValue="roleid"
                       placeholder="Chọn quyền"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>

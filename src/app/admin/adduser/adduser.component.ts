@@ -66,11 +66,11 @@ export class AdduserComponent implements OnInit {
 }
 statusOptions: any= [
   { label: 'Hoạt động', value: 1 },
-  { label: 'Dừng hoạt động', value: 0 }
+  { label: 'Dừng hoạt động', value: 2 }
 ];
 genderOptions: any[] = [
   { label: 'Nam', value: 1 },
-  { label: 'Nữ', value: 0 }
+  { label: 'Nữ', value: 2 }
 ];
 clearInput(controlName: string) {
   this.addemployee.get(controlName)?.reset();
@@ -83,8 +83,9 @@ clearInput(controlName: string) {
       gender: this.selectedGender,
       status: this.selectedStatus
     };
-    this.submitted = true;
+    this.submitted = true; 
     if (this.addemployee.valid){
+      console.log("Dữ liệu hợp lệ");
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
        if (result) {
@@ -94,7 +95,7 @@ clearInput(controlName: string) {
               horizontalPosition: 'right',
               verticalPosition: 'top'
             });
-            if(data.status ==200){
+            if(data.status == 200){
               this.router.navigate(['/admin']);
             }
              
@@ -109,6 +110,7 @@ clearInput(controlName: string) {
      });
     }
     else{
+      console.log(this.addemployee.errors); 
       return; // Nếu form không hợp lệ thì không submit
     }
     
