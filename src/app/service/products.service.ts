@@ -23,6 +23,7 @@ export class ProductsService {
     formData.append('categoryid', data.categoryid);
     formData.append('quantity', data.quantity);
     formData.append('avatarImage', data.image);
+    formData.append('status', data.status);
     return this.http.post(api + '/addproduct',formData );
   }
   update(data:any, id:any):Observable<any>{
