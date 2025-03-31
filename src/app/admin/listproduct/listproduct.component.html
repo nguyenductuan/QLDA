@@ -9,12 +9,12 @@
               <span class="separator-icon pi pi-chevron-right"></span>
             </div>
             <div class="breadcrumb-item cursor-default">
-              Người dùng
+              Sản phẩm
             </div>
           </div>
           <div class="flex">
             <div class="page-title">
-              Danh sách cá nhân
+              Danh sách sản phẩm
             </div>
           </div>
         </div>
@@ -242,7 +242,7 @@
               <td class="ng-star-inserted">{{p.price}}</td>
   
               <td class="ng-star-inserted">{{p.quantity}}</td>
-              <td class="ng-star-inserted">1/1/2024</td>
+              <td class="ng-star-inserted">{{p.createdate | date:'dd/MM/yyyy' }}</td>
               <td class="ng-star-inserted">
                Hoạt động
               </td>
@@ -250,7 +250,7 @@
                 <div class="row-wrapper">      
                   <div class="action-container flex ng-star-inserted">
                     <div class="p-element action-icon ng-star-inserted">
-                      <i class="fas fa-edit" routerLink="editproduct/{{p.product_id}}"></i>
+                      <i class="fas fa-edit" routerLink="editproduct/{{p.productId}}"></i>
                     </div>
                     <div class="p-element action-icon ng-star-inserted">
                       <span class="fas fa-eye" (click)="openProductDetailDialog(p)"></span>

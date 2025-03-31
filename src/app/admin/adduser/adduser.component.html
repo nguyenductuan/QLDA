@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="main-content" style="display: flex;">
-    <form [formGroup]="searchForm">
+    <form [formGroup]="addemployee">
       <div class="advanced-search-layout">
         <div class="grid ng-star-inserted">
           <div class="col-4">
@@ -34,11 +34,13 @@
               <div class="">
                 <p class="">
                   <span class="">
-                    <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('name')"
-                      *ngIf="searchForm.get('name')?.value">
-                    </i> -->
                     <input pInputText formControlName="name" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['name'].errors" class="text-danger">
+                    <span *ngIf="addemployee.controls['name'].errors['required']">Họ và tên là bắt buộc.</span> 
+      
+                    </div>
                   </span>
+                 
                 </p>
               </div>
             </div>
@@ -50,10 +52,13 @@
                 <p class="">
                   <span class="">
                     <p-dropdown [options]="listpositions" [(ngModel)]="selectedPosition"
-                      [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="positionId"
+                    formControlName="position" optionLabel="name" optionValue="positionId"
                       placeholder="Chọn chức vụ"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
+                    <div *ngIf="submitted && !selectedPosition" class="text-danger">
+                      <span>Chức vụ là bắt buộc.</span> 
+                    </div> 
                   </span>
                 </p>
               </div>
@@ -65,10 +70,10 @@
               <div class="">
                 <p class="">
                   <span class="">
-                    <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('address')"
-                      *ngIf="searchForm.get('address')?.value">
-                    </i> -->
                     <input pInputText formControlName="address" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['address'].errors" class="text-danger">
+                      <span *ngIf="addemployee.controls['address'].errors['required']">Địa chỉ là bắt buộc.</span> 
+                      </div>
                   </span>
                 </p>
               </div>
@@ -80,10 +85,11 @@
               <div class="">
                 <p class="">
                   <span class="">
-                    <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('phone')"
-                      *ngIf="searchForm.get('phone')?.value">
-                    </i> -->
                     <input pInputText formControlName="phone" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['phone'].errors" class="text-danger">
+                      <span *ngIf="addemployee.controls['phone'].errors['required']"> Số điện thoại là bắt buộc.</span>
+                      <span *ngIf="addemployee.controls['phone'].errors['pattern']"> Số điện thoại sai định dạng.</span> 
+                      </div>
                   </span>
                 </p>
               </div>
@@ -95,10 +101,12 @@
               <div class="">
                 <p class="">
                   <span class="">
-                    <!-- <i class="pi pi-times cursor-pointer" (click)="clearInput('phone')"
-                      *ngIf="searchForm.get('phone')?.value">
-                    </i> -->
+
                     <input pInputText formControlName="email" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['email'].errors" class="text-danger">
+                      <span *ngIf="addemployee.controls['email'].errors['required']">Email là bắt buộc.</span> 
+                      <span *ngIf="addemployee.controls['email'].errors?.['email']">Email không đúng định dạng.</span>
+                      </div>
                   </span>
                 </p>
               </div>
@@ -112,6 +120,9 @@
                   <span class="">
              
                     <input type="text" formControlName="password" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['password'].errors" class="text-danger">
+                      <span *ngIf="addemployee.controls['password'].errors['required']">Mật khẩu là bắt buộc.</span> 
+                      </div>
                   </span>
                 </p>
               </div>
@@ -124,10 +135,13 @@
                 <p class="w-full">
                   <span class="">
                     <p-dropdown [options]="genderOptions" [(ngModel)]="selectedGender"
-                      [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                    formControlName="gender" optionLabel="label" optionValue="value"
                       placeholder="Chọn giới tính"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
+                    <div *ngIf="submitted && !selectedGender" class="text-danger">
+                      <span>Trạng thái là bắt buộc.</span> 
+                    </div> 
                   </span>
                 </p>
               </div>
@@ -140,10 +154,13 @@
                 <p class="">
                   <span class="">
                     <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
-                      [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                    formControlName="status" optionLabel="label" optionValue="value"
                       placeholder="Chọn trạng thái"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
+                    <div *ngIf="submitted && !selectedStatus" class="text-danger">
+                      <span>Trạng thái là bắt buộc.</span> 
+                    </div> 
                   </span>
                 </p>
               </div>
@@ -155,7 +172,10 @@
               <div class="p-inputgroup">
                 <p class="w-full">
                   <span class="">
-                    <input type="date" style="width: 100%; height: 40px;" formControlName="birthday" class="form-control"> 
+                    <input type="date" style="width: 100%; height: 40px;" formControlName="birthday" class="form-control">
+                    <div *ngIf="submitted && addemployee.controls['birthday'].errors" class="text-danger">
+                      <span *ngIf="addemployee.controls['birthday'].errors['required']">Ngày sinh là bắt buộc.</span> 
+                      </div> 
                   </span>
                 </p>
               </div>
@@ -168,10 +188,13 @@
                 <p class="w-full">
                   <span class="">
                     <p-dropdown [options]="listrole" [(ngModel)]="selectedrole"
-                      [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="roleid"
+                    formControlName="role" optionLabel="name" optionValue="roleid"
                       placeholder="Chọn quyền"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
+                    <div *ngIf="submitted && !selectedrole" class="text-danger">
+                      <span>Quyền là bắt buộc.</span> 
+                    </div> 
                   </span>
                 </p>
               </div>

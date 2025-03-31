@@ -17,13 +17,30 @@ export class ProductsService {
   }
 
   addproduct(data:any):Observable<any>{
-    return this.http.post(api + '/addproduct', data );
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('categoryid', data.categoryid);
+    formData.append('quantity', data.quantity);
+    formData.append('avatarImage', data.image);
+    formData.append('status', data.status);
+    return this.http.post(api + '/addproduct',formData );
   }
+  update(data:any, id:any):Observable<any>{
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('categoryid', data.categoryid);
+    formData.append('quantity', data.quantity);
+    formData.append('avatarImage', data.image);
+    return this.http.put(api + '/updateproduct/' +id,formData );
+  }
+
   delete(id:any): Observable<any> {
     return this.http.delete(api + '/delete-product/'+id);
   }
   productbyid(id:any): Observable<any>{
-  return this.http.get(api+ '/productid?product_id=' +id );
+  return this.http.get(api+ '/productid?productId=' +id );
   }
   
 }

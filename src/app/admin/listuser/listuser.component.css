@@ -2,6 +2,10 @@
     width: 100%;
     padding: 0px 16px 0px 16px;
   }
+  th:first-child, td:first-child {
+    width: 5px; /* Điều chỉnh kích thước theo mong muốn */
+    text-align: center;
+}
   .top-bar-header {
     margin-left: 16px;
     width: 98%;
@@ -11,6 +15,7 @@
     align-items: center;
     justify-content: space-between;
   }
+
   
   /* 1.breadcrumbs */
   .breadcrumbs {

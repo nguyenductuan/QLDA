@@ -28,144 +28,229 @@
     </div>
     <div class="main-content" style="display: flex;">
       <form [formGroup]="editUserForm" class="grid ng-pristine ng-valid ng-touched">
-                  <div class="col-4" style="width: 30%;">
+                  <div class="col-4">
                     <label for="">Họ và tên</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                           
+                          <span class="">
                             <input pInputText formControlName="name" class="form-control" id="name">
+                            <div *ngIf="submitted && editUserForm.controls['name'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['name'].errors['required']">Họ và tên là bắt buộc.</span>
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                  <div class="col-4">
                     <label for="">Email</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                           
+                          <span class="">
                             <input pInputText formControlName="email" class="form-control">
+                            <div *ngIf="submitted && editUserForm.controls['email'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['email'].errors['required']">Email là bắt buộc.</span> 
+                              <span *ngIf="editUserForm.controls['email'].errors?.['email']">Email không đúng định dạng.</span>
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                <div class="col-4">
                     <label for="">Số điện thoại</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
+                          <span class="">
                        
                             <input pInputText formControlName="phone" class="form-control" id="name">
+                            <div *ngIf="submitted && editUserForm.controls['phone'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['phone'].errors['required']"> Số điện thoại là bắt buộc.</span>
+                              <span *ngIf="editUserForm.controls['phone'].errors['pattern']"> Số điện thoại sai định dạng.</span> 
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                  <div class="col-4">
                     <label for="">Địa chỉ</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
+                          <span class="">
                           
                             <input pInputText formControlName="address" class="form-control" id="name">
+                            <div *ngIf="submitted && editUserForm.controls['address'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['address'].errors['required']">Địa chỉ là bắt buộc.</span>
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                    <div class="col-4">
                     <label for="">Mật khẩu</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
+                          <span class="">
                            
                             <input pInputText formControlName="password" class="form-control" id="name">
+                            <div *ngIf="submitted && editUserForm.controls['password'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['password'].errors['required']">Mật khẩu là bắt buộc.</span>
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                  <div class="col-4">
                     <label for="">Ngày sinh</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                          
-                            <input pInputText formControlName="password" class="form-control" id="name">
+                          <span class="">
+                            <input type="date" style="width: 100%; height: 40px;" formControlName="birthday" class="form-control">
+                            <div *ngIf="submitted && editUserForm.controls['birthday'].errors" class="text-danger">
+                              <span *ngIf="editUserForm.controls['birthday'].errors['required']">Ngày sinh là bắt buộc.</span> 
+                              </div>
                           </span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4" style="width: 30%;">
+                  <div class="col-4">
+                    <label for="">Chức vụ</label>
+                    <div class="">
+                      <div class="">
+                        <p class="">
+                          <span class="">
+                            <p-dropdown [options]="positionList" [(ngModel)]="selectedPosition"
+                            formControlName="position" optionLabel="name" optionValue="positionId"
+                              placeholder="Chọn chức vụ"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="submitted && !selectedPosition" class="text-danger">
+                              <span>Chức vụ là bắt buộc.</span> 
+                            </div> 
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Giới tính</label>
+                    <div class="input-container">
+                      <div class="p-inputgroup">
+                        <p class="w-full">
+                          <span class="">
+                            <p-dropdown [options]="genderOptions" [(ngModel)]="selectedGender"
+                            formControlName="gender" optionLabel="label" optionValue="value"
+                              placeholder="Chọn giới tính"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="submitted && !selectedGender" class="text-danger">
+                              <span>Giới tính là bắt buộc.</span> 
+                            </div> 
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Trạng thái</label>
+                    <div class="">
+                      <div class="">
+                        <p class="">
+                          <span class="">
+                            <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+                            formControlName="status" optionLabel="label" optionValue="value"
+                              placeholder="Chọn trạng thái"
+                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="submitted && !selectedStatus" class="text-danger">
+                              <span>Trạng thái là bắt buộc.</span> 
+                            </div> 
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                 <!-- <div class="col-4" style="width: 30%;">
                     <label for="">Trạng thái</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
                           <select id="status" formControlName="status" class="form-control">
                             <option value="1">Hoạt động</option>
-                            <option value="0">Dứng hoạt động</option>
+                            <option value="2">Dừng hoạt động</option>
                           </select>
+                          <div *ngIf="submitted && editUserForm.controls['ststus'].errors" class="text-danger">
+                            <span *ngIf="editUserForm.controls['status'].errors['required']">Trạng thái bắt buộc.</span> 
+                            </div>
                         </p>
+                        
                       </div>
                     </div>
-                  </div>
-                  <div class="col-4" style="width: 30%;">
+                  </div> -->
+                  <!-- <div class="col-4" style="width: 30%;">
                     <label for="">Chức vụ</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                           
+                          <span class="">
                             <select class="form-control" formControlName="position" class="form-control">
-          
-                              <option *ngFor="let position of positionList" [value]="position.position_id">
+                              <option *ngFor="let position of positionList" [value]="position.positionId">
                                 {{position.name}}
                               </option>
                             </select>
+                            <div *ngIf="submitted && !selectedPosition" class="text-danger">
+                              <span>Chức vụ là bắt buộc.</span> 
+                            </div> 
                           </span>
                         </p>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-4" style="width: 30%;">
+                  </div>  -->
+                   <!-- <div class="col-4" style="width: 30%;">
                     <label for="">Quyền</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
+                          <span class="">
                            
                             <select class="form-control" formControlName="role" id="role">
-                              <option *ngFor="let role of roleList" [value]="role.role_id">
+                              <option *ngFor="let role of roleList" [value]="role.roleid">
                                 {{role.name}}</option>
                             </select>
+                            <div *ngIf="submitted && !selectedrole" class="text-danger">
+                              <span>Quyền là bắt buộc.</span> 
+                            </div> 
                           </span>
                         </p>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-4" style="width: 30%;">
+                  </div> -->
+                  <!-- <div class="col-4" style="width: 30%;">
                     <label for="">Giới tính</label>
                     <div class="input-container">
                       <div class="p-inputgroup">
                         <p class="w-full">
                           <select id="gender" formControlName="gender" class="form-control">
                             <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
+                            <option value="2">Nữ</option>
                           </select>
+                          <div *ngIf="submitted && !selectedGender" class="text-danger">
+                            <span>Trạng thái là bắt buộc.</span> 
+                          </div> 
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </form>
     </div>
   

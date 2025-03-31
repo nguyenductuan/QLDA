@@ -278,6 +278,24 @@ resetSearch(){
       console.log('The dialog was closed');
     });
   }
+
+  downloadFile() {
+    this.userService.export().subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'employee.xlsx';  // Đổi tên file nếu cần
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, (error) => {
+      console.error('Lỗi khi tải file:', error);
+    });
+  }
+  export(){
+this.downloadFile();
+  }
   // Hàm xử lý khi người dùng chọn xóa người dùng
   deleteuser(id:any){
     const dialogRef = this.dialog.open(ConfirmationDialogDeleteComponent);
