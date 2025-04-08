@@ -48,14 +48,16 @@
             <div class="">
               <div class="">
                 <p class="">
+
+                  
                   <span class="">
                     <p-dropdown [options]="categorylist" [(ngModel)]="selectedcategory"
-                      [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="categoryId"
+                    formControlName="category" optionLabel="name" optionValue="categoryId"
                       placeholder="Chọn nhóm sp"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>
                     <div *ngIf="submitted && !selectedcategory" class="text-danger">
-                      <span>Trạng thái là bắt buộc.</span> 
+                      <span>Nhóm sản phẩm là bắt buộc.</span> 
                     </div> 
                   </span>
                 </p>
@@ -103,8 +105,8 @@
               <div class="">
                 <p class="">
                   <span class="">
-                    <input type="file" (change)="onFileSelected($event)" accept="image/*">
-                    <img *ngIf="imageUrl" [src]="imageUrl" alt="Ảnh đã chọn" width="200">
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*"  formControlName="image">
+                    <img *ngIf="imageUrl" [src]="imageUrl" alt="Ảnh đã chọn" width="200" >
                     <p *ngIf="imageError" class="text-danger">{{ imageError }}</p>
                   </span>
                 </p>
@@ -118,7 +120,7 @@
                 <p class="">
                   <span class="">
                     <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
-                      [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
+                    formControlName="status" optionLabel="label" optionValue="value"
                       placeholder="Chọn trạng thái"
                       [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
                     </p-dropdown>

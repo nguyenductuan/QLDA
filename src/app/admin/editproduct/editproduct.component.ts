@@ -5,6 +5,7 @@ import { ProductsService } from '../../service/products.service';
 import { CategoryService } from '../../service/category.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogEditComponent } from '../../common/confirmation-dialog-edit/confirmation-dialog-edit.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-editproduct',
@@ -14,7 +15,7 @@ import { ConfirmationDialogEditComponent } from '../../common/confirmation-dialo
 export class EditproductComponent implements OnInit {
 
   constructor( private fb: FormBuilder, 
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, private snackBar: MatSnackBar,
     private router: Router,
     private product: ProductsService,
     private category: CategoryService,public dialog: MatDialog
@@ -69,16 +70,9 @@ this.category.listcategorys().subscribe(
       quantity: this.editProductForm.value.quantity,
  image: this.file // chỉ gửi ảnh mới
 
-    //  image: this.file ? this.file :this.editProductForm.value.thumbnail // Giữ ảnh cũ nếu không chọn ảnh mới
+   
     };
-    // this.product.update(productData, this.product_id).subscribe({
-    //   next: (response) => {
-    //     console.log("Cập nhật sản phẩm thành công")
-    //   },
-    //   error: (err) => {
-    //     console.log("Cạp nhật sản phẩm thất bại", err);
-    //   }
-    // })
+
    const dialogRef = this.dialog.open(ConfirmationDialogEditComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -87,9 +81,20 @@ this.category.listcategorys().subscribe(
           this.product.update(productData, this.product_id).subscribe({
             next: (response) => {
               console.log("Cập nhật sản phẩm thành công")
+              this.snackBar.open(response.message, 'Đóng', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'top'
+              });
+              this.router.navigate(['/admin/listproduct']);
             },
             error: (err) => {
-              console.log("Cạp nhật sản phẩm thất bại", err);
+              console.log("Cập nhật sản phẩm thất bại", err);
+              this.snackBar.open(err.message, 'Đóng', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'top'
+              });
             }
           })
         }

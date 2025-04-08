@@ -19,7 +19,9 @@ constructor(private products: ProductsService,
 productList:any; 
 countproduct:any;
 allChecked: boolean = false;
-
+formatMoney(value: number): string {
+  return value.toLocaleString('en-US'); // Dùng 'en-US' để phân cách hàng nghìn bằng dấu phẩy
+}
 ngOnInit(){
 this.products.listproducts().subscribe({
   next: (data) => {

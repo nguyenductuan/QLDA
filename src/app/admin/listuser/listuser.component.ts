@@ -42,6 +42,7 @@ export class ListuserComponent implements OnInit {
   searchParams:any;
   listrole: any;
   params:any;
+  showDeleteButton = false;
 
   constructor(
     private  userService: UserService,
@@ -59,6 +60,7 @@ export class ListuserComponent implements OnInit {
       { label: 'Nam', value: 1 },
       { label: 'Nữ', value: 0 }
     ];
+
   //Hàm nhập giá trị tìm kiếm
   onInputChanges(){}
 // Hàm xử lý khi người dùng nhập giá trị vào ô input
@@ -201,10 +203,28 @@ resetSearch(){
     const isChecked = event.target.checked;
     this.displayedUsers.forEach((user: any) => user.selected = isChecked);
     this.allChecked = isChecked;
+    this.showDeleteButton = this.displayedUsers.some(item => item.selected);
   }
 // Hàm kiểm tra xem tất cả người dùng đã được chọn hay chưa
   checkIfAllSelected() {
     this.allChecked = this.displayedUsers.every((user: any) => user.selected);
+    this.showDeleteButton = this.displayedUsers.some(item => item.selected);
+  }
+  deleteSelected(){
+      const selectedIds = this.displayedUsers
+      .filter(item => item.selected)
+      .map(item => item.employeeId);
+this.userService.deleteUsers(selectedIds).subscribe(
+  {
+    next:(response) => {
+      console.log(" Xóa thành công")
+      window.location.reload();
+    },
+    error:(err) =>{
+console.log("Xóa thất bại", err)
+    }
+  }
+)
   }
   // Hàm khởi tạo
   ngOnInit() {
