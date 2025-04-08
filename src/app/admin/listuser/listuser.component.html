@@ -174,7 +174,9 @@
                     </div>
                   </div>
                 </form>
+          
                 <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                  <button  class="btn btn-danger" *ngIf="showDeleteButton" (click)="deleteSelected()">Xóa</button>
                   <button class="btn btn-primary" (click)="searchadvance()">Tìm kiếm</button>
                   <button class="btn btn-secondary" (click)="resetSearch()">Đặt lại</button>
                 </div>

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵprovideZonelessChangeDetection } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../service/category.service';
 import { ProductsService } from '../../service/products.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../common/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-addproduct',
@@ -9,8 +13,11 @@ import { ProductsService } from '../../service/products.service';
   styleUrl: './addproduct.component.css'
 })
 export class AddproductComponent implements OnInit {
-constructor(private category: CategoryService,
-  private product:ProductsService,private fb: FormBuilder
+constructor(private category: CategoryService,  private router:Router,
+  private product:ProductsService,private fb: FormBuilder,    private snackBar: MatSnackBar,
+    
+   
+      public dialog: MatDialog,
 ){
 
 }
@@ -51,9 +58,11 @@ onFileSelected(event: any) {
   ngOnInit(): void { 
     this.addproduct = this.fb.group({
       name: ['',[Validators.required]],
-      price: ['', [Validators.required,Validators.min(1)]],
-      quantity:['', [Validators.required, Validators.min(1)]],
-      status:['', [Validators.required]]
+      price: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      quantity:['', [Validators.required,  Validators.pattern('^[0-9]+$')]],
+      status:['', [Validators.required]],
+      category: ['',[Validators.required]],
+      image: ['',[Validators.required]]
     }
     )
     //lấy dannh sách nhóm sản phẩm
@@ -87,13 +96,49 @@ this.category.listcategorys().subscribe(
     quantity: this.addproduct.value.quantity,
     image: this.file
   };
-this.product.addproduct(productData).subscribe({
-  next:(data)=>{ 
-    console.log(data);
-    },
-  error:(err)=>{
-    console.log("Lỗi",err)
-  }
-})
+  this.submitted = true;
+  console.log(this.addproduct.valid);
+  if (this.addproduct.valid){
+  console.log("Dữ liệu hợp lệ");
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+        dialogRef.afterClosed().subscribe(result => {
+         if (result) {
+             this.product.addproduct(productData).subscribe((data: any) => {
+              this.snackBar.open(data.message, 'Đóng', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'top'
+              });
+              if(data.status == 200){
+                this.router.navigate(['/admin/listproduct']);
+              }
+               
+            }, error => {
+              this.snackBar.open(error.error.message, 'Đóng', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'top'
+              });
+            });
+         }
+       });
+      
+      }
+      else{
+        console.log("Lỗi")
+         // Duyệt qua các control trong form để log lỗi
+      for (const controlName in this.addproduct.controls) {
+        const control = this.addproduct.controls[controlName];
+        
+        if (control.invalid) {
+          console.log(`Lỗi ở trường: ${controlName}`);
+          
+          // Kiểm tra lỗi cụ thể của từng control
+          for (const error in control.errors) {
+            console.log(`Lỗi ${error} ở trường ${controlName}`);
+          }
+        }
+      }
+      }
   }
 }

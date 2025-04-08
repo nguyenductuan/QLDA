@@ -85,6 +85,7 @@ clearInput(controlName: string) {
       status: this.selectedStatus
     };
     this.submitted = true; 
+    console.log("A",this.addemployee.valid);
     if (this.addemployee.valid){
       console.log("Dữ liệu hợp lệ");
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
