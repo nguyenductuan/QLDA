@@ -76,14 +76,6 @@
                               </option>
                             </select>
                           </span>
-<!-- 
-                       <span class="">
-                        <p-dropdown [options]="categorylist" [(ngModel)]="selectedcategory"
-                          [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="categoryId"
-                          placeholder="Chọn nhóm sp"
-                          [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
-                        </p-dropdown>
-                      </span> -->
                     </p>
                   </div>
                 </div>
@@ -96,7 +88,7 @@
                             <span class="">  
                                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
                                 <img *ngIf="imageUrl" [src]="imageUrl" alt="Ảnh đã chọn" width="200">
-                                <!-- <p *ngIf="editProductForm.value.thumbnail">Tên ảnh: {{ editProductForm.value.thumbnail }}</p> -->
+                               
                             </span>
                         </p>
                     </div>

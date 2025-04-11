@@ -15,6 +15,7 @@ import { ConfirmationDialogEditComponent } from './common/confirmation-dialog-ed
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProductDetailDialogComponent } from './common/product-detail-dialog/product-detail-dialog.component';
 
 
 

@@ -3,6 +3,7 @@ import { ProductsService } from '../../service/products.service';
 import { ConfirmationDialogDeleteComponent } from '../../common/confirmation-dialog-delete/confirmation-dialog-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductDetailDialogComponent } from '../../common/product-detail-dialog/product-detail-dialog.component';
 
 @Component({
   selector: 'app-listproduct',
@@ -48,15 +49,15 @@ updatekistproduct(){
   checkIfAllSelected() {
     this.allChecked = this.productList.every((user: any) => user.selected);
   }
-  openProductDetailDialog(p: any): void {
-    // const dialogRef = this.dialog.open(UserDetailDialogComponent, {
-    //   width: '70%',
-    //   data: { user }
-    // });
-    // console.log(user);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
+  openProductDetailDialog(p: any) {
+    const dialogRef = this.dialog.open(ProductDetailDialogComponent, {
+      width: '70%',
+      data: { p}
+    });
+ console.log(p)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
   // Hàm xử lý khi người dùng chọn xóa người dùng
   deleteproduct(id:any){

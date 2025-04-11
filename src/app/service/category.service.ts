@@ -15,4 +15,7 @@ export class CategoryService {
   listcategorys(): Observable<any> {
     return this.http.get(api + '/category');
   }
+    delete(id:any): Observable<any> {
+      return this.http.delete(api + '/delete-category/'+id);
+    }
 }
