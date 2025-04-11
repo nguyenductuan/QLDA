@@ -1,0 +1,61 @@
+<div class="group-detail-dialog">
+    <div class="dialog-header" style="padding: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap:8px;">
+        <div class="header-title">Xem chi tiết sản phẩm</div>
+        <span><i class="pi pi-times" (click)="closeDialog()"></i></span>
+      </div>
+    </div>
+    <div class="dialog-content">
+      <div class="dialog-content-header">
+        <div class="info-section">
+          <div class="title">Thông tin sản phẩm</div>
+          <div class="info-grid">
+            <div class="row-info col-6">
+              <div class="label-row-info">
+                <label>Tên sản phẩm</label>
+                <div class="info-value">{{a.name}}</div>
+              </div>
+            </div>
+            <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Giá </label>
+                  <div class="info-value">{{a.price}}</div>
+                </div>
+              </div>
+              <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Nhóm sản phẩm</label>
+                  <div class="info-value">{{a.category.name}}</div>
+                </div>
+              </div>
+              <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Số lượng</label>
+                  <div class="info-value">{{a.quantity}}</div>
+                </div>
+              </div>
+              <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Ngày tạo</label>
+                  <div class="info-value">{{a.createdate}}</div>
+                </div>
+              </div>
+              <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Trạng thái</label>
+                  <div class="info-value">{{a.status}}</div>
+                </div>
+              </div>
+              <div class="row-info col-6">
+                <div class="label-row-info">
+                  <label>Ảnh sản phẩm</label>
+                  <!-- Thiếu câu lệnh láy thông tin ảnh -->
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="footer-action">
+          <button (click)="closeDialog()">Đóng</button>
+        </div>
+      </div>
+  
