@@ -42,6 +42,8 @@ export class ProductsService {
   productbyid(id:any): Observable<any>{
   return this.http.get(api+ '/productid?productId=' +id );
   }
-  
+    deletepeoducts(ids: any): Observable<any> {
+      return this.http.post(api + '/delete-products' ,ids);
+    }
 }
 

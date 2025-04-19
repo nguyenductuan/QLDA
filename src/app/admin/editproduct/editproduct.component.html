@@ -94,5 +94,24 @@
                     </div>
                 </div>
             </div>
+            <div class="col-4">
+                <label for="">Trạng thái</label>
+                <div class="">
+                  <div class="">
+                    <p class="">
+                      <span class="">
+                        <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+                        formControlName="status" optionLabel="label" optionValue="value"
+                          placeholder="Chọn trạng thái"
+                          [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
+                        </p-dropdown>
+                        <div *ngIf="submitted && !selectedStatus" class="text-danger">
+                          <span>Trạng thái là bắt buộc.</span> 
+                        </div> 
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
         </form>
     </div>

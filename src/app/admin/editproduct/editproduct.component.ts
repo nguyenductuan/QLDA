@@ -24,6 +24,13 @@ export class EditproductComponent implements OnInit {
   categorylist:any;
 editProductForm: FormGroup;
 selectedcategory:any;
+selectedStatus:any;
+submitted = false;
+statusOptions: any[] = [
+  { label: 'Hoạt động', value: 1 },
+  { label: 'Dừng hoạt động', value: 2 }
+];
+
   ngOnInit(): void {
 this.product_id =  this.route.snapshot.paramMap.get('id');
 this.category.listcategorys().subscribe(
@@ -63,6 +70,7 @@ this.category.listcategorys().subscribe(
 
   }
   editProduct(){
+    this.submitted = true;
     const productData = {
       name: this.editProductForm.value.name,
       categoryid: this.editProductForm.value.category,

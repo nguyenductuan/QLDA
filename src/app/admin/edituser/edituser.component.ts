@@ -19,6 +19,7 @@ export class EdituserComponent {
   positionList:any;
   roleList:any;
   employee:any;
+ 
   selectedStatus:any;
   selectedPosition:any;
   selectedGender:any;

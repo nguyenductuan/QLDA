@@ -49,7 +49,6 @@ console.log("A",this.categorys)
     })
   }
   checkIfAllSelected(){}
-
   toggleAll(event:any){
 
   }
