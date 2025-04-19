@@ -50,6 +50,7 @@ this.category.listcategorys().subscribe(
       name: [''],
       price: [''],
       quantity:[''],
+      status:[''],
       category:[''],
       thumbnail: ['']  // Thêm trường lưu tên file ảnh
 
@@ -59,15 +60,16 @@ this.category.listcategorys().subscribe(
   console.log(product);
   
   this.editProductForm.patchValue({
-    productId: product.productId,
-    name: product.name,
-    price: product.price,
-    status: product.status,
-    quantity: product.quantity,
-    createdate: product.createdate,
-    updatedate: product.updatedate,
-    category: product.category?.categoryId || '' , // Gán categoryId vào form
-    thumbnail: product.thumbnail || ''  // Gán tên file ảnh
+    ...product,
+    // productId: product.productId,
+    // name: product.name,
+    // price: product.price,
+    // status: product.status,
+    // quantity: product.quantity,
+    // createdate: product.createdate,
+    // updatedate: product.updatedate,
+     category: product.category?.categoryId || '' , // Gán categoryId vào form
+    // thumbnail: product.thumbnail || ''  // Gán tên file ảnh
       });
       this.imageUrl = product.thumbnail ? `http://localhost:8080/product/images/${product.thumbnail}` : null;
  })
@@ -80,13 +82,10 @@ this.category.listcategorys().subscribe(
       categoryid: this.editProductForm.value.category,
       price: this.editProductForm.value.price,
       quantity: this.editProductForm.value.quantity,
- image: this.file // chỉ gửi ảnh mới
-
-   
+      image: this.file ?? null
     };
-
+console.log("A",productData.image)
    const dialogRef = this.dialog.open(ConfirmationDialogEditComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (this.editProductForm.valid) {
