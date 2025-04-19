@@ -33,6 +33,8 @@ statusOptions: any[] = [
 
   ngOnInit(): void {
 this.product_id =  this.route.snapshot.paramMap.get('id');
+
+
 this.category.listcategorys().subscribe(
   {
     next:(data) => {
@@ -55,10 +57,12 @@ this.category.listcategorys().subscribe(
 
  this.product.productbyid(this.product_id).subscribe((product:any) => {
   console.log(product);
+  
   this.editProductForm.patchValue({
     productId: product.productId,
     name: product.name,
     price: product.price,
+    status: product.status,
     quantity: product.quantity,
     createdate: product.createdate,
     updatedate: product.updatedate,
