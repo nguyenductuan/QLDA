@@ -24,8 +24,17 @@ export class EditproductComponent implements OnInit {
   categorylist:any;
 editProductForm: FormGroup;
 selectedcategory:any;
+selectedStatus:any;
+submitted = false;
+statusOptions: any[] = [
+  { label: 'Hoạt động', value: 1 },
+  { label: 'Dừng hoạt động', value: 2 }
+];
+
   ngOnInit(): void {
 this.product_id =  this.route.snapshot.paramMap.get('id');
+
+
 this.category.listcategorys().subscribe(
   {
     next:(data) => {
@@ -41,6 +50,7 @@ this.category.listcategorys().subscribe(
       name: [''],
       price: [''],
       quantity:[''],
+      status:[''],
       category:[''],
       thumbnail: ['']  // Thêm trường lưu tên file ảnh
 
@@ -48,33 +58,34 @@ this.category.listcategorys().subscribe(
 
  this.product.productbyid(this.product_id).subscribe((product:any) => {
   console.log(product);
+  
   this.editProductForm.patchValue({
-    productId: product.productId,
-    name: product.name,
-    price: product.price,
-    quantity: product.quantity,
-    createdate: product.createdate,
-    updatedate: product.updatedate,
-    category: product.category?.categoryId || '' , // Gán categoryId vào form
-    thumbnail: product.thumbnail || ''  // Gán tên file ảnh
+    ...product,
+    // productId: product.productId,
+    // name: product.name,
+    // price: product.price,
+    // status: product.status,
+    // quantity: product.quantity,
+    // createdate: product.createdate,
+    // updatedate: product.updatedate,
+     category: product.category?.categoryId || '' , // Gán categoryId vào form
+    // thumbnail: product.thumbnail || ''  // Gán tên file ảnh
       });
       this.imageUrl = product.thumbnail ? `http://localhost:8080/product/images/${product.thumbnail}` : null;
  })
 
   }
   editProduct(){
+    this.submitted = true;
     const productData = {
       name: this.editProductForm.value.name,
       categoryid: this.editProductForm.value.category,
       price: this.editProductForm.value.price,
       quantity: this.editProductForm.value.quantity,
- image: this.file // chỉ gửi ảnh mới
-
-   
+      image: this.file ?? null
     };
-
+console.log("A",productData.image)
    const dialogRef = this.dialog.open(ConfirmationDialogEditComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (this.editProductForm.valid) {

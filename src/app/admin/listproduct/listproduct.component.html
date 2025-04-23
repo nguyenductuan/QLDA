@@ -32,157 +32,11 @@
               <span class="fas fa-sync-alt ">
               </span>
             </button>
+            <button  class="btn btn-danger" *ngIf="showDeleteButton" (click)="deleteSelected()">Xóa</button>
             <button class="p-buttons button" [routerLink]="'addproduct'">Thêm mới</button>
           </div>
         </div>
       </div>
-<!-- Form Tìm kiếm -->
-      <!-- <div class="advanced-search expanded">
-        <div class="advanced-search-form">
-          <div class="collapse-container-content">
-            <div class="advanced-search-content">
-              <div class="advanced-search_title">
-                <div class="title">
-               
-                </div>
-                <div class="close-container">
-                  <i class="icon-direction-up-01"></i>
-                </div>
-              </div>
-              <div class="advanced-search-layout">
-                <form [formGroup]="searchForm" (ngSubmit)="searchadvance()" class="grid">
-                  <div class="col-4">
-                    <label for="">Họ và tên</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <i class="pi pi-times cursor-pointer" (click)="clearInput('name')"
-                              *ngIf="searchForm.get('name')?.value">
-                            </i>
-                            <input pInputText formControlName="name" class="form-control">
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Chức vụ</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <p-dropdown [options]="listpositions" [(ngModel)]="selectedPosition"
-                              [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="position_id"
-                              placeholder="Chọn chức vụ"
-                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
-                            </p-dropdown>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Địa chỉ</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <i class="pi pi-times cursor-pointer" (click)="clearInput('address')"
-                              *ngIf="searchForm.get('adđress')?.value">
-                            </i>
-                            <input pInputText formControlName="address" class="form-control">
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Số điện thoại</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <i class="pi pi-times cursor-pointer" (click)="clearInput('phone')"
-                              *ngIf="searchForm.get('phone')?.value">
-                            </i>
-                            <input pInputText formControlName="phone" class="form-control">
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Giới tính</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <p-dropdown [options]="genderOptions" [(ngModel)]="selectedGender"
-                              [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
-                              placeholder="Chọn giới tính"
-                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
-                            </p-dropdown>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Trạng thái</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
-                              [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="value"
-                              placeholder="Chọn trạng thái"
-                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
-                            </p-dropdown>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Thời gian</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <app-datepicker [defaultDates]="dateRange" (dateSelect)="onDateSelect($event)"
-                              [key]="datePickerKey" style="height: 22px;"></app-datepicker>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <label for="">Quyền</label>
-                    <div class="input-container">
-                      <div class="p-inputgroup">
-                        <p class="w-full">
-                          <span class=" p-calendar p-input-icon-right">
-                            <p-dropdown [options]="listrole" [(ngModel)]="selectedrole"
-                              [ngModelOptions]="{standalone: true}" optionLabel="name" optionValue="role_id"
-                              placeholder="Chọn quyền"
-                              [style]="{'width':'100%','padding-top': '4px','padding-bottom': '10px'}" [showClear]="true">
-                            </p-dropdown>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
-                  <button class="btn btn-primary" (click)="searchadvance()">Tìm kiếm</button>
-                  <button class="btn btn-secondary" (click)="resetSearch()">Đặt lại</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="table-container">
         <table class="table-ds">
           <thead>
@@ -244,7 +98,7 @@
               <td class="ng-star-inserted">{{p.quantity}}</td>
               <td class="ng-star-inserted">{{p.createdate | date:'dd/MM/yyyy' }}</td>
               <td class="ng-star-inserted">
-               Hoạt động
+               {{p.status ==1 ? 'Hoạt động': 'Dừng hoạt động' }}
               </td>
               <td class="ng-star-inserted">
                 <div class="row-wrapper">      

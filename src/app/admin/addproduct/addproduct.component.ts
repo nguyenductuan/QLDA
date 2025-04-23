@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵprovideZonelessChangeDetection } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../service/category.service';
 import { ProductsService } from '../../service/products.service';
