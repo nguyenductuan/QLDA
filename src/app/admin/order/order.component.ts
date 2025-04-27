@@ -1,49 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { PaymentService } from '../../service/payment.service';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
+  constructor(private order:PaymentService){}
 
-// ngOnInit(): void {
-  
+listorder:any;
+  ngOnInit(): void {
+//Lấy danh sách order
+    this.order.listorder().subscribe (
+    {
+      next:(response) => {
+        this.listorder = response;
+        console.log(this.listorder);
+      },
+      error:(err)=>{
+        console.log("Lỗi API");
+      }
+    }
+  )
 
-// }
-// checkIfAllSelected(){}
-// openOderDetailDialog(event:any){}
-
-// deleteorder(id:any){}
+ }
 searchTerm = '';
 selectedStatus = '';
-orders = [
-  {
-    id: 'DH001',
-    customer: 'Nguyễn Văn A',
-    date: '2025-04-08',
-    status: 'Đang xử lý',
-    total: 1500000
-  },
-  {
-    id: 'DH002',
-    customer: 'Trần Thị B',
-    date: '2025-04-07',
-    status: 'Đã giao',
-    total: 3200000
-  },
-  // ... thêm đơn hàng khác
-];
-
 get filteredOrders() {
-  return this.orders.filter(order =>
-    (order.customer.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      order.id.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-    (this.selectedStatus === '' || order.status === this.selectedStatus)
+  return this.listorder.filter((listorder:any) =>
+    (listorder.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+    listorder.orderId.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
+    (this.selectedStatus === '' || listorder.payment_status === this.selectedStatus)
   );
 }
 
-deleteOrder(id: string) {
-  this.orders = this.orders.filter(order => order.id !== id);
+deleteOrder(orderId: string) {
+ // this.orders = this.orders.filter(order => order.id !== id);
 }
 }
