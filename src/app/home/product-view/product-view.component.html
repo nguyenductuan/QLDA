@@ -1,7 +1,7 @@
 
 <div class="home-main">
     <div class="home-left">
-        Danh mục sản phẩm
+       
     </div>
     <div class="home-right">
 <div class="product"*ngIf="products">
@@ -20,8 +20,10 @@
         <input type="text" [(ngModel)]="quantity" class="quantity" [min]="1" />
         <button  (click)="increment()" class="quantity-btn" >+</button>
       </div>
-      <div><button (click)="addToCart(products.product_id)">Thêm vào giỏ</button></div>
-      <div><button>Mua ngay</button></div>
+      <div><button (click)="addToCart(products.productId)">Thêm vào giỏ</button>
+        <button style="margin-left: 10px;">Mua ngay</button>
+      </div>
+  
       <!-- <button (click)="addToCart(product)">Mua ngay</button> -->
 </div>
     </div>

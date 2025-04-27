@@ -97,7 +97,7 @@
   
               <td class="ng-star-inserted">{{p.quantity}}</td>
               <td class="ng-star-inserted">{{p.createdate | date:'dd/MM/yyyy' }}</td>
-              <td class="ng-star-inserted">
+              <td class="ng-star-inserted" [ngClass]="getStatusClass(p.status)" class="status-badge">
                {{p.status ==1 ? 'Hoạt động': 'Dừng hoạt động' }}
               </td>
               <td class="ng-star-inserted">

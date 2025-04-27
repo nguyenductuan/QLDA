@@ -163,6 +163,17 @@ resetSearch(){
       this.updateDisplayedUsers();
     })
 }
+//xử lý css trạng thái
+getStatusClass(status: string): string {
+  switch (status) {
+    case 'Hoạt động':
+      return 'status-shipping';
+    case 'Dừng hoạt động':
+      return 'status-completed';
+    default:
+      return '';
+  }
+}
 // Hàm xử lý khi người dùng chọn trang
   onInputChange(event: any) {
     const inputPage = parseInt(event.target.value, 10);

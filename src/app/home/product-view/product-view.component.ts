@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CartService } from '../../service/cart.service';
 import { UserService } from '../../service/user.service';
 import { Subject } from 'rxjs';
+import { UserinfoService } from '../../service/userinfo.service';
 
 @Component({
   selector: 'app-product-view',
@@ -19,6 +20,7 @@ export class ProductViewComponent implements OnInit {
   sum:any;
   constructor(private product: ProductsService,
      private router: Router,
+     private userinfo: UserinfoService,
     private route: ActivatedRoute,
     private cart: CartService,private app:UserService) { }
 
@@ -31,25 +33,19 @@ export class ProductViewComponent implements OnInit {
       this.quantity--;
     }
   }
-  private reloadSubject = new Subject<void>();  // Subject để phát tín hiệu reload
-  isLogin= this.app.checklogin();
-  user = this.isLogin;
-  employee_id:any;
-
+ // private reloadSubject = new Subject<void>();  // Subject để phát tín hiệu reload
   addToCart(product_id:any) {
+
    
-    this.employee_id = this.user.employee_id;
-   
-    this.cart.addTocart(product_id, this.quantity,this.employee_id).subscribe((data: any) => {
+    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
    
       console.log("M",data);
       this.getCart();
     })
-// location.reload();
    
   }
   getCart(){
-    this.cart.listCartUser(this.isLogin.employee_id).subscribe((data: any) => {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
       this.listcart = data;
       this.sum = this.listcart.length;
 
@@ -57,7 +53,7 @@ export class ProductViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.productbyId();  
+   this.productbyId();  
     this.getCart();
   }
 

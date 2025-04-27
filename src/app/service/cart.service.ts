@@ -13,25 +13,25 @@ export class CartService {
 
 updateQuantity(product_id: any, quantity:any,employee_id: any){
   const body= {
-    product_id:product_id,
+    productId:product_id,
     quantity:quantity,
-    employee_id:employee_id
+    employeeId:employee_id
   }
   return this.http.post<any>(api + '/cart/updateproduct', body);
 }
 //Thêm sản phẩm vào giỏ
 addTocart(product_id: any, quantity:any,employee_id: any){
 const body= {
-  product_id:product_id,
+  productId:product_id,
   quantity:quantity,
-  employee_id:employee_id
+  employeeId:employee_id
 }
   return this.http.post<any>(api + '/cart/add-product', body);
 }
 
 //Lấy danh sách sản phẩm trong giỏ hàng
 listCartUser(id:any) :Observable<any>{
-  return this.http.get(api + '/cart-view?employee_id=' +id)
+  return this.http.get(api + '/cart-view?employeeId=' +id)
 }
 
   //lấy danh sách mã giảm giá

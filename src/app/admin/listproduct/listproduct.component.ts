@@ -48,7 +48,25 @@ updatekistproduct(){
     this.showDeleteButton = this.productList.some((item: { selected: any; }) => item.selected);
 
   }
+//xử lý css trạng thái
+// getStatusClass(status: string): string {
+//   switch (status) {
+//     case '1':
+//       return 'status-shipping';
+//     case '0':
+//       return 'status-completed';
+//     default:
+//       return '';
+//   }
+// }
 
+getStatusClass(status: number): string {
+  if (status === 1) {
+    return 'status-active';
+  } else {
+    return 'status-inactive';
+  }
+}
   deleteSelected(){
     const selectedIds = this.productList
     .filter((item: { selected: any; })  => item.selected)

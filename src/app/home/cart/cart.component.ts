@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart.service';
 import { UserService } from '../../service/user.service';
-import { Location } from '@angular/common';
 import { Route, Router } from '@angular/router';
+import { UserinfoService } from '../../service/userinfo.service';
+import { ConfirmationDialogDeleteComponent } from '../../common/confirmation-dialog-delete/confirmation-dialog-delete.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -11,30 +14,45 @@ import { Route, Router } from '@angular/router';
 export class CartComponent implements OnInit {
   discountCodes: any;
   selectedDiscount: string = '';
-
+  productIds: any;
+  total: number = 0;
+  selectedProductIds: number[] = [];
+  selectedProductId: number[] = [];
+  allChecked: any;
+  listcart: any;
+  quanty: number;
   constructor(private cart: CartService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private app: UserService,
-
+    private userinfo: UserinfoService,
     private router: Router
   ) { }
   ngOnInit() {
     this.listCartUser();
     this.listdiscount();
-
   }
-  isLogin = this.app.checklogin();
-  user = this.isLogin.employee_id;
-  listcart: any;
+  user = this.userinfo.getUserInfo();
+
   //Lấy danh sách sản phẩm trong giỏ hàng của người dùng
   listCartUser() {
-    this.cart.listCartUser(this.user).subscribe((data: any) => {
+    this.cart.listCartUser(this.user.employeeId).subscribe((data: any) => {
       this.listcart = data;
       console.log(this.listcart);
     })
   }
-  total: number = 0;
-  selectedProductIds: number[] = [];
-  selectedProductId: number[] = [];
+  // hàm khi click chọn tất cả 
+  // Biến lưu trữ trạng thái chọn tất cả
+  toggleAll(event: any) {
+    const isChecked = event.target.checked;
+    this.listcart.forEach((p: any) => p.selected = isChecked);
+    this.allChecked = isChecked;
+
+    this.selectedProductIds = this.listcart
+      .filter((item: any) => item.selected)
+      .map((item: any) => item.product.productId);
+    this.calculateTotalPrice();
+  }
   // Hàm gọi khi checkbox của sản phẩm được chọn
   toggleSelection(productId: number, event: any): void {
     if (event.target.checked) {
@@ -47,6 +65,8 @@ export class CartComponent implements OnInit {
         this.selectedProductIds.splice(index, 1);
       }
     }
+    //hàm xử lý check vào checkbox all khi check hết các checkbox
+    this.allChecked = this.listcart.every((p: any) => p.selected);
     this.calculateTotalPrice();
   }
   checkproduct() {
@@ -56,27 +76,26 @@ export class CartComponent implements OnInit {
   calculateTotalPrice() {
     this.total = 0; // Reset total before calculating
     this.listcart.forEach((product: any) => {
-      if (this.selectedProductIds.includes(product.product.product_id)) {
+      if (this.selectedProductIds.includes(product.product.productId)) {
         this.total += product.product.price * product.quantity;
       }
     });
   }
-  quantity: number;
-  increment(p: any, quantity: number, employee_id: any) {
+
+  increment(p: any, quantity: number, employeeId: any) {
 
     //update số lượng trong DB 
-    this.quantity = quantity + 1;
+    this.quanty = quantity + 1;
     this.cart.updateQuantity(p,
-      this.quantity, employee_id).
+      this.quanty, employeeId).
       subscribe((data: any) => {
       })
     //load lại trang
     window.location.reload();
   }
-  decrement(p: any, quantity: number, employee_id: any) {
-    this.quantity = quantity - 1;
-    console.log("M", quantity);
-    this.cart.updateQuantity(p, this.quantity, employee_id).
+  decrement(p: any, quantity: number, employeeId: any) {
+    this.quanty = quantity - 1;
+    this.cart.updateQuantity(p, this.quanty, employeeId).
       subscribe((data: any) => {
       })
     //load lại trang
@@ -95,11 +114,23 @@ export class CartComponent implements OnInit {
     })
   }
   deleteproduct(id: any) {
-    this.cart.deleteproduct(id).subscribe((data: any) => {
+
+    const dialogRef = this.dialog.open(ConfirmationDialogDeleteComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.cart.deleteproduct(id).subscribe((data: any) => {
+          this.snackBar.open('Xóa thành công', 'Đóng', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
+
+          window.location.reload(); // Tải lại trang sau khi xóa thành công
+        })
+      };
     })
-    window.location.reload();
   }
-  productIds: any;
+
   checkout() {
     this.productIds = this.selectedProductIds; // Ví dụ về danh sách productIds
     this.router.navigate(['/home/payment'], { state: { productids: this.productIds } });
