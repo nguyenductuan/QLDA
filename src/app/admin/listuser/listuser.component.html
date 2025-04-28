@@ -261,14 +261,13 @@
               <td class="ng-star-inserted">{{user.email}}</td>
               <td class="ng-star-inserted">{{user.birthday | date:'dd/MM/yyyy'}}</td>
               <td class="ng-star-inserted">{{user.createdate | date:'dd/MM/yyyy'}}</td>
-  
               <td class="ng-star-inserted">{{user.address}}</td>
               <td class="ng-star-inserted">{{user.position}}</td>
               <td class="ng-star-inserted">
                 {{user.gender ==1 ? 'Nam':'Nữ'}}
               </td>
               <td class="ng-star-inserted">{{user.phone}}</td>
-              <td class="ng-star-inserted">
+              <td class="ng-star-inserted" [ngClass]="getStatusClass(user.status)">
                 {{user.status ==1 ? 'Hoạt động': 'Dừng hoạt động'}}
               </td>
               <td class="ng-star-inserted">{{user.role}}</td>

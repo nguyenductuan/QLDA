@@ -3,6 +3,7 @@ import { CartService } from '../../service/cart.service';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../service/products.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UserinfoService } from '../../service/userinfo.service';
 
 @Component({
   selector: 'app-payment',
@@ -18,14 +19,15 @@ export class PaymentComponent implements OnInit {
   totalPrice: any;
   productids: any;
   total: any;
-  paymentDetails = {
-    name: '',
-    address: '',
-    paymentMethod: 'Thanh toán khi nhận hàng',  // Mặc định là thanh toán khi nhận hàng
-  };
+  // paymentDetails = {
+  //   name: '',
+  //   address: '',
+  //   paymentMethod: 'Thanh toán khi nhận hàng',  // Mặc định là thanh toán khi nhận hàng
+  // };
 
   constructor(private cartService: CartService,
     private router: Router,
+    private userinfo: UserinfoService,
     private productService: ProductsService) {
     // Lấy danh sách các sản phẩm đã chọn
     const navigation = this.router.getCurrentNavigation();
@@ -51,12 +53,12 @@ export class PaymentComponent implements OnInit {
         {
           next: (products) => {
             this.CartItems = this.productids.map((productId: number) => {
-              const product = products.find((p: { product_id: number }) => p.product_id == productId);
+              const product = products.find((p: { productId: number }) => p.productId == productId);
               // Lấy số lượng từ giỏ 000 theo product_id của sản phẩm 
               let totalQuantity = 0;
               // Chỉ định kiểu cho item
-              cart.forEach((item: { product: { product_id: number }; quantity: number }) => {
-                if (item.product.product_id === productId) {
+              cart.forEach((item: { product: { productId: number }; quantity: number }) => {
+                if (item.product.productId === productId) {
                   totalQuantity += item.quantity;
                 }
               });
@@ -91,11 +93,11 @@ export class PaymentComponent implements OnInit {
   userParams: any;
   total_amount: any;
   CartItem: any[];
-  // user_id lấy dữ liệu từ localstorage 
-  user_id = 2;
+  // lấy dữ liệu cá nhân
+  user_id= this.userinfo.getUserInfo().employeeId;
   placeorder() {
     this.CartItem = this.CartItems.map(cartItems => ({
-      product_id: cartItems.product.product_id,
+      productId: cartItems.product.productId,
       quantity: cartItems.quantity
     }));
     // lấy dữ liệu tổng tiền

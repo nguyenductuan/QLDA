@@ -6,6 +6,18 @@
     width: 5px; /* Điều chỉnh kích thước theo mong muốn */
     text-align: center;
 }
+/* css status */
+.status-shipping {
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  background-color: #E8F5E9;
+}
+
+.status-completed {
+  color: #2196F3;
+  border: 1px solid #2196F3;
+  background-color: #E3F2FD;
+}
   .top-bar-header {
     margin-left: 16px;
     width: 98%;

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserinfoService } from '../../service/userinfo.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent {
   data: any;
  user:any;
 errorMessage: string = '';
-constructor(public  app:UserService, public router: Router, private snackBar: MatSnackBar){}
+constructor(public  app:UserService,public userinfo: UserinfoService, public router: Router, private snackBar: MatSnackBar){}
   ngOnInit(): void {
     this.formLogin = new FormGroup({
      email: new FormControl('', Validators.required),
@@ -40,7 +41,7 @@ if(this.data.data == '')
 }
 else
 {
-let jsonData = JSON.stringify(this.data.data[0]);
+
 
     if(this.data.data[0].role.name == 'User')
       {
@@ -52,7 +53,9 @@ let jsonData = JSON.stringify(this.data.data[0]);
         this.router.navigate(['/admin']);
         
       }
-    sessionStorage.setItem('login', jsonData);
+
+      this.userinfo.setUserInfo(this.data.data[0]);
+
 }
 })
   }

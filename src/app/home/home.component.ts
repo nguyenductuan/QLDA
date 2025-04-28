@@ -34,7 +34,7 @@ this.getCart();
     })
   }
   getCart(){
-    this.cartService.listCartUser(this.isLogin.employee_id).subscribe((data: any) => {
+    this.cartService.listCartUser(2).subscribe((data: any) => {
       this.listcart = data;
       this.sum = this.listcart.length;
       

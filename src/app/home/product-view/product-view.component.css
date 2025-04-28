@@ -4,7 +4,6 @@
 }
 .home-left{
 width: 15%;
-border: solid 1px #ccc ;
 height: 550px;
 }
 .home-right{
@@ -15,7 +14,7 @@ display: flex;
 }
 .product{
     width: 25%;
-    border: solid 1px #cccccc; height: 200px; flex: 0 0 auto;
+    border: solid 1px #cccccc; height: 245px; flex: 0 0 auto;
    padding: 8px;
    width: 25%;
 }
