@@ -120,13 +120,14 @@ export class CartComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cart.deleteproduct(id).subscribe((data: any) => {
-          this.loadCart();
+        
           this.snackBar.open('Xóa thành công', 'Đóng', {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top'
           }
           );
+          this.loadCart();// lỗi không load lại được data
         })
       };
     })

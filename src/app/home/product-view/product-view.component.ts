@@ -35,14 +35,10 @@ export class ProductViewComponent implements OnInit {
   }
  // private reloadSubject = new Subject<void>();  // Subject để phát tín hiệu reload
   addToCart(product_id:any) {
-
-   
-    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
-   
-      console.log("M",data);
+    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {  
       this.getCart();
+      window.location.reload();
     })
-   
   }
   getCart(){
     this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {

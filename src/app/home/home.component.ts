@@ -23,10 +23,9 @@ export class HomeComponent implements OnInit {
   listcart: any;
 user:any;
   ngOnInit() {
-
   this.listproduct();
   this.user = this.userinfo.getUserInfo().name;
-this.getCart();
+   this.getCart();
   }
   listproduct(){
     this.productService.listproducts().subscribe((data: any) => {
@@ -37,7 +36,6 @@ this.getCart();
     this.cartService.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
       this.listcart = data;
       this.sum = this.listcart.length;
-      
     })
   }
 }
