@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { UserService } from '../service/user.service';
+import { UserinfoService } from '../service/userinfo.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,10 +10,10 @@ import { UserService } from '../service/user.service';
 })
 export class AdminComponent {
 
-  constructor(public app: UserService){}
-  isLogin= this.app.checklogin();
-   user = this.isLogin.name;
-   email = this.isLogin.email;
+  constructor(private userinfo: UserinfoService){}
+
+  user = this.userinfo.getUserInfo().name;
+  email = this.userinfo.getUserInfo().email;
   ngOnInit(): void {
   }
 }

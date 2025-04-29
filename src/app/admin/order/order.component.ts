@@ -10,23 +10,24 @@ export class OrderComponent implements OnInit {
   constructor(private order:PaymentService){}
 
 listorder:any;
-  ngOnInit(): void {
-//Lấy danh sách order
-    this.order.listorder().subscribe (
-    {
-      next:(response) => {
-        this.listorder = response;
-        console.log(this.listorder);
-      },
-      error:(err)=>{
-        console.log("Lỗi API");
-      }
-    }
-  )
-
- }
 searchTerm = '';
 selectedStatus = '';
+  ngOnInit(): void {
+this.fetchOrders();
+ }
+ // Lấy danh sách order
+ private fetchOrders(): void {
+  this.order.listorder().subscribe({
+    next: (response) => {
+      this.listorder = response;
+      console.log('Danh sách đơn hàng:', this.listorder);
+    },
+    error: (error) => {
+      console.error('Lỗi khi lấy danh sách đơn hàng:', error);
+    }
+  });
+}
+
 get filteredOrders() {
   return this.listorder.filter((listorder:any) =>
     (listorder.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
