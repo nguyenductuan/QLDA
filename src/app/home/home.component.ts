@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../service/products.service';
 import { CartService } from '../service/cart.service';
 import { UserService } from '../service/user.service';
+import { UserinfoService } from '../service/userinfo.service';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +14,18 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private cartService: CartService,
-    private app: UserService) {
+    private app: UserService, 
+    private userinfo: UserinfoService) {
   }
 
-  isLogin = this.app.checklogin();
-  user = this.isLogin.name;
   products: any;
   sum: any;
   listcart: any;
-
+user:any;
   ngOnInit() {
-  console.log("Name:", this.user);
+
   this.listproduct();
-  
+  this.user = this.userinfo.getUserInfo().name;
 this.getCart();
   }
   listproduct(){
@@ -34,7 +34,7 @@ this.getCart();
     })
   }
   getCart(){
-    this.cartService.listCartUser(2).subscribe((data: any) => {
+    this.cartService.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
       this.listcart = data;
       this.sum = this.listcart.length;
       

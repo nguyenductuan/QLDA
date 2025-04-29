@@ -81,25 +81,27 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
+  // Thêm hàm này để load lại dữ liệu cart
+  loadCart() {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
+      this.listcart = data;
+    })
+  }
   increment(p: any, quantity: number, employeeId: any) {
-
     //update số lượng trong DB 
     this.quanty = quantity + 1;
     this.cart.updateQuantity(p,
       this.quanty, employeeId).
       subscribe((data: any) => {
       })
-    //load lại trang
-    window.location.reload();
+    this.loadCart();
   }
   decrement(p: any, quantity: number, employeeId: any) {
     this.quanty = quantity - 1;
     this.cart.updateQuantity(p, this.quanty, employeeId).
       subscribe((data: any) => {
       })
-    //load lại trang
-    window.location.reload();
+    this.loadCart();
   }
   //hàm lấy danh sách mã giảm giá
   listdiscount() {
@@ -114,23 +116,21 @@ export class CartComponent implements OnInit {
     })
   }
   deleteproduct(id: any) {
-
     const dialogRef = this.dialog.open(ConfirmationDialogDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cart.deleteproduct(id).subscribe((data: any) => {
+          this.loadCart();
           this.snackBar.open('Xóa thành công', 'Đóng', {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top'
-          });
-
-          window.location.reload(); // Tải lại trang sau khi xóa thành công
+          }
+          );
         })
       };
     })
   }
-
   checkout() {
     this.productIds = this.selectedProductIds; // Ví dụ về danh sách productIds
     this.router.navigate(['/home/payment'], { state: { productids: this.productIds } });
