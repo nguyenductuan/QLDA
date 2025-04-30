@@ -33,20 +33,26 @@ export class ProductViewComponent implements OnInit {
       this.quantity--;
     }
   }
- // private reloadSubject = new Subject<void>();  // Subject để phát tín hiệu reload
-  addToCart(product_id:any) {
-    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {  
-      this.getCart();
-      window.location.reload();
-    })
-  }
+  count:any;
   getCart(){
     this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
       this.listcart = data;
-      this.sum = this.listcart.length;
-
+      this.count = this.listcart.data.length;
+      this.sum = this.count;
+      
+      // Cập nhật count vào CartService
+    this.cart.updateCartCount(this.count);
     })
   }
+ 
+  addToCart(product_id:any) {
+    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {  
+      this.getCart();
+
+      // window.location.reload();
+    })
+  }
+
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
    this.productbyId();  

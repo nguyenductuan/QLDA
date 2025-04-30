@@ -36,9 +36,8 @@ export class CartComponent implements OnInit {
 
   //Lấy danh sách sản phẩm trong giỏ hàng của người dùng
   listCartUser() {
-    this.cart.listCartUser(this.user.employeeId).subscribe((data: any) => {
-      this.listcart = data;
-      console.log(this.listcart);
+    this.cart.listCartUser(this.user.employeeId).subscribe((response: any) => {
+      this.listcart = response.data;
     })
   }
   // hàm khi click chọn tất cả 
@@ -127,7 +126,7 @@ export class CartComponent implements OnInit {
             verticalPosition: 'top'
           }
           );
-          this.loadCart();// lỗi không load lại được data
+          window.location.reload();
         })
       };
     })

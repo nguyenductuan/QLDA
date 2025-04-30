@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const api='http://localhost:8080';
 @Injectable({
@@ -11,6 +11,12 @@ export class CartService {
   private cart :any[] =[];
   constructor(  private http: HttpClient, public router:Router) { }
 
+  private cartCount = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCount.asObservable();
+
+  updateCartCount(count: number) {
+    this.cartCount.next(count);
+  }
 updateQuantity(product_id: any, quantity:any,employee_id: any){
   const body= {
     productId:product_id,
@@ -54,6 +60,6 @@ return this.http.get(api+ '/productIds?ids=' +productids);
 }
 
 createorder(data:any) : Observable<any>{
-  return this.http.post(api+'/addorder', data)
+  return this.http.post(api+'/order', data)
 }
 }
