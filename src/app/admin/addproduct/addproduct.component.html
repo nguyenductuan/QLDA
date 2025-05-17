@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="main-content" style="display: flex;">
-    <form [formGroup]="addproduct">
+    <form [formGroup]="addProductForm">
       <div class="advanced-search-layout">
         <div class="grid ng-star-inserted">
           <div class="col-4">
@@ -35,8 +35,8 @@
                 <p class="">
                   <span class="">
                     <input pInputText formControlName="name" class="form-control">
-                    <div *ngIf="submitted && addproduct.controls['name'].errors" class="text-danger">
-                      <span *ngIf="addproduct.controls['name'].errors['required']">Tên sản phẩm là bắt buộc.</span>
+                    <div *ngIf="submitted && addProductForm.controls['name'].errors" class="text-danger">
+                      <span *ngIf="addProductForm.controls['name'].errors['required']">Tên sản phẩm là bắt buộc.</span>
                     </div>
                   </span>
                 </p>
