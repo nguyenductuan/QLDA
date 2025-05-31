@@ -23,8 +23,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ListProductComponent,
-    
-    
     ProductViewComponent,
     CartComponent,
     PaymentComponent

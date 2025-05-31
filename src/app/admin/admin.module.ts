@@ -32,6 +32,7 @@ import { OrderComponent } from './order/order.component';
 const routes: Routes = [
   {
     path: '', component: AdminComponent,
+  
     children: [
       { path: '', component:ListuserComponent},
       {path:'adduser',component:AdduserComponent},
@@ -43,7 +44,8 @@ const routes: Routes = [
       {path:'listproduct/addproduct', component:AddproductComponent},
       {path:'listproduct/editproduct/:id', component:EditproductComponent},
       {path:'order', component:OrderComponent},
-      {path:'listcategory', component:ListcategoryComponent}
+      {path:'listcategory', component:ListcategoryComponent},
+         { path: '', redirectTo: '/admin', pathMatch: 'full' }
     ]
   }
 ]
@@ -78,12 +80,10 @@ const routes: Routes = [
     MatSnackBarModule,
     RouterModule.forChild(routes)
   ],
-  providers: [
-    DialogService,
-    DynamicDialogRef
-  ],
+  // providers: [
+  //   DialogService,
+  //   DynamicDialogRef
+  // ],
   exports: [RouterModule]
 })
-export class AdminModule {
-// constructor(public app: UserService) {}
- }
+export class AdminModule {}

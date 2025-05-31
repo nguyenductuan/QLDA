@@ -14,31 +14,32 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private cartService: CartService,
-    private app: UserService, 
+    private app: UserService,
     private userinfo: UserinfoService) {
   }
-
   products: any;
   sum: any;
   listcart: any;
-  user:any;
-  
+  user: any;
+  ngOnInit(): void {
+    this.loadProducts();
+    this.loadUserInfo()
+    this.loadCartCount();
+  }
+  private loadUserInfo(): void {
+    const userInfo = this.userinfo.getUserInfo();
+    this.user = userInfo?.name ?? '';
+  }
   //Lấy số lượng sản phẩm trong giỏ
-  getCount(){
+  private loadCartCount():void {
     this.cartService.cartCount$.subscribe((count: number) => {
       this.sum = count;
     });
   }
   // Danh sách sản phẩm
-  listproduct(){
+  private loadProducts(): void {
     this.productService.listproducts().subscribe((data: any) => {
       this.products = data;
     })
-  }
-
-  ngOnInit() {
-  this.listproduct();
-  this.user = this.userinfo.getUserInfo().name;
-  this.getCount();
   }
 }

@@ -17,9 +17,6 @@ export class UserService {
   login(data: any): Observable<any> {
     return this.http.post(api + '/login', data);
   }
-  // get currentUserValue() {
-  //   return this.currentUserSubject.value;
-  // }
   checklogin() {
     let jsonData = sessionStorage.getItem('login');
     if (jsonData) {

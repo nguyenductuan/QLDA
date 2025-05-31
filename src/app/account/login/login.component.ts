@@ -13,49 +13,48 @@ import { UserinfoService } from '../../service/userinfo.service';
 })
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
-  errorMessage:String;
+  errorMessage: String;
 
   constructor(
     private userService: UserService,
     private userinfoService: UserinfoService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
-      email: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
   }
 
   login(): void {
     if (this.formLogin.invalid) return;
-
-    this.userService.login(this.formLogin.value).subscribe(response => {
-      const { data, message } = response;
-
-      if (!data || data.length === 0) {
+    this.userService.login(this.formLogin.value).subscribe({
+      next: response => {
+        const { employee, message } = response;
         this.showSnackbar(message);
-        return;
+        // Điều hướng trang
+        switch (employee.role.name) {
+          case 'User':
+            this.router.navigate(['/home']);
+            break;
+          case 'Admin':
+            this.router.navigate(['/admin']);
+            break;
+        }
+      },
+      error: err => {
+        if (err.status === 401) {
+          const message = err.error?.message || 'Tài khoản hoặc mật khẩu không đúng';
+          this.showSnackbar(message);
+        } else {
+          this.showSnackbar("Đã xảy ra lỗi không xác định");
+        }
       }
-
-      const user = data[0];
-      this.userinfoService.setUserInfo(user);
-
-      switch (user.role?.name) {
-        case 'User':
-          this.router.navigate(['/home']);
-          break;
-        case 'Admin':
-          this.router.navigate(['/admin']);
-          break;
-        default:
-          this.showSnackbar('Không xác định được vai trò người dùng.');
-      }
-    });
+    })
   }
-
   private showSnackbar(message: string): void {
     this.snackBar.open(message, 'Đóng', {
       duration: 3000,
