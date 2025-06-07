@@ -8,21 +8,7 @@ const api = 'http://localhost:8080';
   providedIn: 'root'
 })
 export class UserService {
-  // private currentUserSubject: BehaviorSubject<any>;
-  // public currentUser: Observable<any>;
   constructor(private http: HttpClient, public router: Router) {
-    // this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')!));
-    // this.currentUser = this.currentUserSubject.asObservable();
-  }
-  login(data: any): Observable<any> {
-    return this.http.post(api + '/login', data);
-  }
-  checklogin() {
-    let jsonData = sessionStorage.getItem('login');
-    if (jsonData) {
-      return JSON.parse(jsonData);
-    }
-    return false;
   }
   getlistuser(): Observable<any> {
     return this.http.get(api + '/employee')

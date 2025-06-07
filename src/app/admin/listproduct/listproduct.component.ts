@@ -48,17 +48,6 @@ updatekistproduct(){
     this.showDeleteButton = this.productList.some((item: { selected: any; }) => item.selected);
 
   }
-//xử lý css trạng thái
-// getStatusClass(status: string): string {
-//   switch (status) {
-//     case '1':
-//       return 'status-shipping';
-//     case '0':
-//       return 'status-completed';
-//     default:
-//       return '';
-//   }
-// }
 
 getStatusClass(status: number): string {
   if (status === 1) {

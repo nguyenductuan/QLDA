@@ -6,11 +6,8 @@ import { Injectable } from '@angular/core';
 export class UserinfoService {
 
   constructor() { }
-  setUserInfo(user: any) {
-    sessionStorage.setItem('userInfo', JSON.stringify(user));
-  }
   getUserInfo() {
-    const userInfo = sessionStorage.getItem('userInfo');
+    const userInfo = sessionStorage.getItem('login');
     return userInfo ? JSON.parse(userInfo) : null;
   }
 }

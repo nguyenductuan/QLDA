@@ -13,7 +13,7 @@ export class ProductsService {
 
 
   listproducts(): Observable<any> {
-    return this.http.get(api + '/product');
+    return this.http.get(api + '/products');
   }
 
   addproduct(data:any):Observable<any>{

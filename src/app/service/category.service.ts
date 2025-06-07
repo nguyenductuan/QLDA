@@ -13,7 +13,7 @@ export class CategoryService {
  
   constructor( private http: HttpClient, public router:Router) {}
   listcategorys(): Observable<any> {
-    return this.http.get(api + '/category');
+    return this.http.get(api + '/categories');
   }
     delete(id:any): Observable<any> {
       return this.http.delete(api + '/delete-category/'+id);

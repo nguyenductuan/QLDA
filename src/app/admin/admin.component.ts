@@ -11,8 +11,7 @@ export class AdminComponent implements OnInit {
   user: string='';
   email: string='';
   ngOnInit(): void {
-    // Lấy thông tin người dùng từ UserinfoService
-    const userInfo = this.userinfo.getUserInfo();
+    const userInfo = this.userinfo.getUserInfo().employee
     this.user = userInfo.name;
     this.email = userInfo.email;
   }

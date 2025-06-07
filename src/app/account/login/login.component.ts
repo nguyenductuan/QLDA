@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from '../../service/user.service';
 import { UserinfoService } from '../../service/userinfo.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,8 @@ export class LoginComponent implements OnInit {
   errorMessage: String;
 
   constructor(
-    private userService: UserService,
-    private userinfoService: UserinfoService,
     private router: Router,
+    private authservice:AuthService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.formLogin.invalid) return;
-    this.userService.login(this.formLogin.value).subscribe({
+    this.authservice.login(this.formLogin.value).subscribe({
       next: response => {
         const { employee, message } = response;
         this.showSnackbar(message);
