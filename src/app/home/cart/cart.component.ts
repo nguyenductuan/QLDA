@@ -32,11 +32,10 @@ export class CartComponent implements OnInit {
     this.listCartUser();
     this.listdiscount();
   }
-  user = this.userinfo.getUserInfo();
 
   //Lấy danh sách sản phẩm trong giỏ hàng của người dùng
   listCartUser() {
-    this.cart.listCartUser(this.user.employeeId).subscribe((response: any) => {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((response: any) => {
       this.listcart = response.data;
     })
   }
@@ -82,7 +81,7 @@ export class CartComponent implements OnInit {
   }
   // Thêm hàm này để load lại dữ liệu cart
   loadCart() {
-    this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
       this.listcart = data;
     })
   }

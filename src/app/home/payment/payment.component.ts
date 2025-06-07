@@ -46,7 +46,7 @@ export class PaymentComponent implements OnInit {
     this.listdiscount();
     const a = this.convertArrayToString(this.productids);
     // lấy sản phẩm trong giỏ hàng
-    this.cartService.listCartUser(2).subscribe((data: any) => {
+    this.cartService.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
       const cart = data; // Dữ liệu giỏ hàng
       //productids sẽ mất khi load lại trang . Cách xử lý lưu vào LocalStorage hoặc SessionStorage hoặc serverice
       this.cartService.listproductIds(a).subscribe(
@@ -57,11 +57,16 @@ export class PaymentComponent implements OnInit {
               // Lấy số lượng từ giỏ 000 theo product_id của sản phẩm 
               let totalQuantity = 0;
               // Chỉ định kiểu cho item
+              console.log("Sản phẩm", product);
+              // Fix đoạn này
+              //-------------------//
               cart.forEach((item: { product: { productId: number }; quantity: number }) => {
                 if (item.product.productId === productId) {
                   totalQuantity += item.quantity;
                 }
               });
+        //-------------------------------//
+
               return {
                 product: product!,
                 quantity: totalQuantity

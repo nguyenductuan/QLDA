@@ -23,7 +23,7 @@ updateQuantity(product_id: any, quantity:any,employee_id: any){
     quantity:quantity,
     employeeId:employee_id
   }
-  return this.http.post<any>(api + '/cart/updateproduct', body);
+  return this.http.post<any>(api + '/cart/update', body);
 }
 //Thêm sản phẩm vào giỏ
 addTocart(product_id: any, quantity:any,employee_id: any){
@@ -32,17 +32,17 @@ const body= {
   quantity:quantity,
   employeeId:employee_id
 }
-  return this.http.post<any>(api + '/cart/add-product', body);
+  return this.http.post<any>(api + '/cart/add', body);
 }
 
 //Lấy danh sách sản phẩm trong giỏ hàng
 listCartUser(id:any) :Observable<any>{
-  return this.http.get(api + '/cart-view?employeeId=' +id)
+  return this.http.get(api + '/cart/view/' +id)
 }
 
   //lấy danh sách mã giảm giá
   listdiscount() :Observable<any> {
-    return this.http.get(api + '/discount');
+    return this.http.get(api + '/discounts');
   }
   //ÁP dụng mã giảm giá
   applyDiscount(totalprice:any,selectedDiscount:any) :Observable<any>{
@@ -56,7 +56,7 @@ listCartUser(id:any) :Observable<any>{
     return this.http.delete(api+ '/delete-producttoCart/' +id);
   }
 listproductIds(productids:any ):Observable<any>{
-return this.http.get(api+ '/productIds?ids=' +productids);
+return this.http.get(api+ '/products/by-ids/' +productids);
 }
 
 createorder(data:any) : Observable<any>{

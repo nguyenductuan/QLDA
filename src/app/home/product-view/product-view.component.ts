@@ -35,7 +35,7 @@ export class ProductViewComponent implements OnInit {
   }
   count:any;
   getCart(){
-    this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
       this.listcart = data;
       this.count = this.listcart.data.length;
       this.sum = this.count;

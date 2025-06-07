@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   listcart: any;
   user: any;
   ngOnInit(): void {
-    this.loadProducts();
+    // this.loadProducts();
     this.loadUserInfo()
     this.loadCartCount();
   }
@@ -36,10 +36,10 @@ export class HomeComponent implements OnInit {
       this.sum = count;
     });
   }
-  // Danh sách sản phẩm
-  private loadProducts(): void {
-    this.productService.listproducts().subscribe((data: any) => {
-      this.products = data;
-    })
-  }
+  // // Danh sách sản phẩm
+  // private loadProducts(): void {
+  //   this.productService.listproducts().subscribe((data: any) => {
+  //     this.products = data;
+  //   })
+  // }
 }
