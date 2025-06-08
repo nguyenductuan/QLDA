@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { UserService } from '../../service/user.service';
-import { UserinfoService } from '../../service/userinfo.service';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -14,7 +11,6 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
-  errorMessage: String;
 
   constructor(
     private router: Router,
@@ -35,7 +31,6 @@ export class LoginComponent implements OnInit {
       next: response => {
         const { employee, message } = response;
         this.showSnackbar(message);
-        // Điều hướng trang
         switch (employee.role.name) {
           case 'User':
             this.router.navigate(['/home']);
@@ -55,6 +50,7 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
   private showSnackbar(message: string): void {
     this.snackBar.open(message, 'Đóng', {
       duration: 3000,
