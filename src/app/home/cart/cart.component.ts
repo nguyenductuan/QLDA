@@ -90,6 +90,7 @@ export class CartComponent implements OnInit {
   increment(p: any, quantity: number, employeeId: any) {
     //update số lượng trong DB 
     this.quanty = quantity + 1;
+      
     console.log("Số lượng", this.quanty);
     this.cart.updateQuantity(p,
       this.quanty, employeeId).subscribe({
@@ -104,6 +105,7 @@ export class CartComponent implements OnInit {
   }
   decrement(p: any, quantity: number, employeeId: any) {
     this.quanty = quantity - 1;
+    if (this.quanty < 1) return; // Không cho phép số lượng nhỏ hơn 1
     this.cart.updateQuantity(p, this.quanty, employeeId).subscribe({
     next: () => {
       this.loadCart(); // gọi sau khi update xong
