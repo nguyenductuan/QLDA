@@ -46,7 +46,7 @@ export class ProductViewComponent implements OnInit {
   }
  
   addToCart(product_id:any) {
-    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {  
+    this.cart.addTocart(product_id, this.quantity,this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {  
       this.getCart();
 
       // window.location.reload();
