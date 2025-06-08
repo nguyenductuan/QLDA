@@ -40,7 +40,6 @@ export class CartComponent implements OnInit {
       this.listcart = response.data;
        this.count = this.listcart.length;
       this.sum = this.count;
-      console.log("B", this.listcart);
       // Cập nhật count vào CartService
     this.cart.updateCartCount(this.count);
 
@@ -90,8 +89,6 @@ export class CartComponent implements OnInit {
   increment(p: any, quantity: number, employeeId: any) {
     //update số lượng trong DB 
     this.quanty = quantity + 1;
-      
-    console.log("Số lượng", this.quanty);
     this.cart.updateQuantity(p,
       this.quanty, employeeId).subscribe({
     next: () => {

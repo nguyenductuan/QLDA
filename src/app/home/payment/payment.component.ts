@@ -42,6 +42,7 @@ export class PaymentComponent implements OnInit {
   convertArrayToString(numbers: any[]) {
     return numbers.join(',');
   }
+  listproduct: any;
   ngOnInit(): void {
     this.listdiscount();
     const a = this.convertArrayToString(this.productids);
@@ -52,26 +53,8 @@ export class PaymentComponent implements OnInit {
       this.cartService.listproductIds(a).subscribe(
         {
           next: (products) => {
-            this.CartItems = this.productids.map((productId: number) => {
-              const product = products.find((p: { productId: number }) => p.productId == productId);
-              // Lấy số lượng từ giỏ 000 theo product_id của sản phẩm 
-              let totalQuantity = 0;
-              // Chỉ định kiểu cho item
-              console.log("Sản phẩm", product);
-              // Fix đoạn này
-              //-------------------//
-              cart.forEach((item: { product: { productId: number }; quantity: number }) => {
-                if (item.product.productId === productId) {
-                  totalQuantity += item.quantity;
-                }
-              });
-        //-------------------------------//
-
-              return {
-                product: product!,
-                quantity: totalQuantity
-              }; // Trả về sản phẩm và số lượng
-            });
+            this.listproduct =  products;
+               console.log("Sản phẩm", products);
             this.sumproductToCart();
           }
         }
@@ -90,8 +73,8 @@ export class PaymentComponent implements OnInit {
   }
   sumproductToCart() {
     this.total = 0;
-    this.CartItems.forEach((product: any) => {
-      this.total += product.product.price * product.quantity;
+    this.listproduct.forEach((product: any) => {
+      this.total += product.price * product.quantity;
     })
   }
   //Viết chuwong trình mã giảm giá

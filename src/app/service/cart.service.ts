@@ -50,7 +50,7 @@ listCartUser(id:any) :Observable<any>{
       totalAmount: totalprice,
       selectedDiscount: selectedDiscount
     };
-    return this.http.post(api+'/applydiscount', body);
+    return this.http.post(api+'/discounts/apply', body);
   }
   deleteproduct(id:any):Observable<any>{
     return this.http.delete(api+ '/delete-producttoCart/' +id);

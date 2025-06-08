@@ -51,11 +51,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let p of CartItems">
-                        <td>{{p.product.name}}</td>
+                    <tr *ngFor="let p of listproduct">
+                        <td>{{p.name}}</td>
                         <td>{{p.quantity}}</td>
-                        <td>{{p.product.price}}</td>
-                        <td>{{(p.product.price * p.quantity)}}</td>
+                        <td>{{p.price}}</td>
+                        <td>{{(p.price * p.quantity)}}</td>
                     </tr>
                 </tbody>
             </table>
