@@ -60,6 +60,6 @@ return this.http.get(api+ '/products/by-ids/' +productids);
 }
 
 createorder(data:any) : Observable<any>{
-  return this.http.post(api+'/order', data)
+  return this.http.post(api+'/orders', data)
 }
 }

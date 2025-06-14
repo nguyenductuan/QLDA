@@ -43,24 +43,11 @@ export class PaymentComponent implements OnInit {
     return numbers.join(',');
   }
   listproduct: any;
+  a:any;
   ngOnInit(): void {
     this.listdiscount();
-    const a = this.convertArrayToString(this.productids);
-    // lấy sản phẩm trong giỏ hàng
-    this.cartService.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
-      const cart = data; // Dữ liệu giỏ hàng
-      //productids sẽ mất khi load lại trang . Cách xử lý lưu vào LocalStorage hoặc SessionStorage hoặc serverice
-      this.cartService.listproductIds(a).subscribe(
-        {
-          next: (products) => {
-            this.listproduct =  products;
-               console.log("Sản phẩm", products);
-            this.sumproductToCart();
-          }
-        }
-      );
-    }
-    )
+     this.a = this.convertArrayToString(this.productids);
+this.listCartUser();
     this.orderForm = new FormGroup(
       {
         name: new FormControl(''),
@@ -82,16 +69,37 @@ export class PaymentComponent implements OnInit {
   total_amount: any;
   CartItem: any[];
   // lấy dữ liệu cá nhân
-  user_id= this.userinfo.getUserInfo().employeeId;
+  user_id= this.userinfo.getUserInfo().employee.employeeId;
+
+  listCartUser(){
+    // lấy sản phẩm trong giỏ hàng
+    this.cartService.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
+      const cart = data; // Dữ liệu giỏ hàng
+      //productids sẽ mất khi load lại trang . Cách xử lý lưu vào LocalStorage hoặc SessionStorage hoặc serverice
+      this.cartService.listproductIds(this.a).subscribe(
+        {
+          next: (products) => {
+            this.listproduct =  products;
+               console.log("Sản phẩm", products);
+            this.sumproductToCart();
+          }
+        }
+      );
+    }
+    )
+  }
   placeorder() {
-    this.CartItem = this.CartItems.map(cartItems => ({
-      productId: cartItems.product.productId,
+
+   
+this.listCartUser();
+    this.CartItem = this.listproduct.map((cartItems: { productId:any; quantity: any; }) => ({
+      productId: cartItems.productId,
       quantity: cartItems.quantity
     }));
     // lấy dữ liệu tổng tiền
     this.total_amount = this.total;
     this.userParams = {
-      user_id: this.user_id,
+      userid: this.user_id,
       total_amount: this.total_amount,
       ...this.orderForm.value,
       cartItem: this.CartItem
@@ -99,7 +107,7 @@ export class PaymentComponent implements OnInit {
     this.cartService.createorder(this.userParams).subscribe((data: any) => {
       console.log(data);
     })
-    //đặt hàng bắn thông báo đặt hàng thành công focus sang trang tình trạng đơn hàng
+
   }
   //Danh sách mã giảm giá
   listdiscount() {

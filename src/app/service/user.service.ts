@@ -17,16 +17,16 @@ export class UserService {
     return this.http.get(api + '/employee/search?name=' + name);
   }
   addUser(user: any): Observable<any> {
-    return this.http.post<any>(api + '/addemployee', user);
+    return this.http.post<any>(api + '/employee', user);
   }
   searchadvance(data: any): Observable<any> {
     return this.http.post<any>(api + '/searchadvance', data);
   }
   getUserById(id: any): Observable<any> {
-    return this.http.get(api + '/employeebyId?id=' + id);
+    return this.http.get(api + '/employee/' + id);
   }
   updateUser(user: any, id:any): Observable<any> {
-    return this.http.put(api + '/updateemployee/'+id, user);
+    return this.http.put(api + '/employee/'+id, user);
   }
   deleteUser(id: any): Observable<any> {
     return this.http.delete(api + '/delete-employee/' + id);

@@ -11,7 +11,7 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
-
+errorMessage:any;
   constructor(
     private router: Router,
     private authservice:AuthService,
