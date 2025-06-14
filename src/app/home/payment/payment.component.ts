@@ -19,12 +19,6 @@ export class PaymentComponent implements OnInit {
   totalPrice: any;
   productids: any;
   total: any;
-  // paymentDetails = {
-  //   name: '',
-  //   address: '',
-  //   paymentMethod: 'Thanh toán khi nhận hàng',  // Mặc định là thanh toán khi nhận hàng
-  // };
-
   constructor(private cartService: CartService,
     private router: Router,
     private userinfo: UserinfoService,
@@ -34,7 +28,6 @@ export class PaymentComponent implements OnInit {
     if (navigation?.extras.state) {
       this.productids = navigation.extras.state['productids'];
     }
-
   }
   orderForm: FormGroup;
 
@@ -47,7 +40,7 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.listdiscount();
      this.a = this.convertArrayToString(this.productids);
-this.listCartUser();
+     this.listCartUser();
     this.orderForm = new FormGroup(
       {
         name: new FormControl(''),
@@ -64,11 +57,9 @@ this.listCartUser();
       this.total += product.price * product.quantity;
     })
   }
-  //Viết chuwong trình mã giảm giá
   userParams: any;
   total_amount: any;
   CartItem: any[];
-  // lấy dữ liệu cá nhân
   user_id= this.userinfo.getUserInfo().employee.employeeId;
 
   listCartUser(){
