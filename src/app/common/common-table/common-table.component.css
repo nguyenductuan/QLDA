@@ -1,0 +1,31 @@
+.table-responsive {
+  background-color: #ffffff;
+}
+
+.table-ds {
+  width: 100%;
+  border-collapse: collapse;
+  /* margin-bottom: 20px; */
+}
+
+.table-responsive .table-ds thead tr{
+  border-top: 1px solid  #ccc;
+} 
+.table-responsive .table-ds th {
+  width: 12.5%;
+  padding: 11px 16px;
+
+  border-bottom: 1px solid #e5e7eb;
+  border-width: 0 0 1px 0;
+  background: #f3f4f6;
+}
+
+.table-ds tr td {
+  padding: 11px 16px;
+  height: 3.875rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.action-container {
+  gap: 8px;
+}

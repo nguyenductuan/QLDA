@@ -1,0 +1,7 @@
+.pagination-nav { display: flex; align-items: center; float: right; margin-right: 10px; }
+.pagination { list-style: none; display: flex; gap: 4px; padding: 0; margin: 0; }
+.pagination li { }
+.pagination li.active button { font-weight: bold; background: #007ad9; color: #fff; }
+.pagination li.disabled button { opacity: 0.5; pointer-events: none; }
+.pagination button { border: none; background: #f0f0f0; padding: 4px 8px; cursor: pointer; border-radius: 3px; }
+.pagination-info { margin-left: 12px; }
