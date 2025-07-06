@@ -8,7 +8,7 @@ import { UserinfoService } from '../service/userinfo.service';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  isLogin: any;
+
   constructor(private router: Router, public app: UserinfoService) { }
   canActivate(
     route: ActivatedRouteSnapshot,

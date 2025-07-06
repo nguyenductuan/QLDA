@@ -50,7 +50,7 @@ export class AddproductComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    this.categoryService.listcategorys().subscribe({
+    this.categoryService.listcategorys(1,1).subscribe({
       next: (data) => (this.categoryList = data),
       error: (err) => console.error('Lỗi khi lấy danh sách nhóm sản phẩm:', err)
     });

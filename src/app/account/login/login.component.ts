@@ -24,21 +24,28 @@ errorMessage:any;
       password: new FormControl('', Validators.required),
     });
   }
-
+private handelRedirect(role:string): void {
+if (role === 'User') {
+      this.router.navigate(['/home']);
+    } else if (role === 'Admin') {
+      this.router.navigate(['/admin']);
+    }
+}
   login(): void {
     if (this.formLogin.invalid) return;
     this.authservice.login(this.formLogin.value).subscribe({
       next: response => {
         const { employee, message } = response;
         this.showSnackbar(message);
-        switch (employee.role.name) {
-          case 'User':
-            this.router.navigate(['/home']);
-            break;
-          case 'Admin':
-            this.router.navigate(['/admin']);
-            break;
-        }
+        this.handelRedirect(employee.role?.name);
+        // switch (employee.role.name) {
+        //   case 'User':
+        //     this.router.navigate(['/home']);
+        //     break;
+        //   case 'Admin':
+        //     this.router.navigate(['/admin']);
+        //     break;
+        // }
       },
       error: err => {
         if (err.status === 401) {

@@ -12,10 +12,8 @@ import { UserinfoService } from '../../service/userinfo.service';
 })
 
 export class PaymentComponent implements OnInit {
-  selectedProductIds: any;
   discountCodes: any;
   selectedDiscount: string = '';
-  CartItems: any[];
   totalPrice: any;
   productids: any;
   total: any;
@@ -80,8 +78,6 @@ export class PaymentComponent implements OnInit {
     )
   }
   placeorder() {
-
-   
 this.listCartUser();
     this.CartItem = this.listproduct.map((cartItems: { productId:any; quantity: any; }) => ({
       productId: cartItems.productId,

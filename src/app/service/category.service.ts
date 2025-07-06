@@ -12,8 +12,9 @@ export class CategoryService {
 
  
   constructor( private http: HttpClient, public router:Router) {}
-  listcategorys(): Observable<any> {
-    return this.http.get(api + '/categories');
+  listcategorys(pageNo:any,pageSize:any): Observable<any> {
+    const params = { pageNo: pageNo, pageSize: pageSize };
+    return this.http.get(api + '/categories', { params });
   }
     delete(id:any): Observable<any> {
       return this.http.delete(api + '/delete-category/'+id);
