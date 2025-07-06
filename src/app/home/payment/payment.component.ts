@@ -12,19 +12,11 @@ import { UserinfoService } from '../../service/userinfo.service';
 })
 
 export class PaymentComponent implements OnInit {
-  selectedProductIds: any;
   discountCodes: any;
   selectedDiscount: string = '';
-  CartItems: any[];
   totalPrice: any;
   productids: any;
   total: any;
-  // paymentDetails = {
-  //   name: '',
-  //   address: '',
-  //   paymentMethod: 'Thanh toán khi nhận hàng',  // Mặc định là thanh toán khi nhận hàng
-  // };
-
   constructor(private cartService: CartService,
     private router: Router,
     private userinfo: UserinfoService,
@@ -34,7 +26,6 @@ export class PaymentComponent implements OnInit {
     if (navigation?.extras.state) {
       this.productids = navigation.extras.state['productids'];
     }
-
   }
   orderForm: FormGroup;
 
@@ -42,37 +33,12 @@ export class PaymentComponent implements OnInit {
   convertArrayToString(numbers: any[]) {
     return numbers.join(',');
   }
+  listproduct: any;
+  a:any;
   ngOnInit(): void {
     this.listdiscount();
-    const a = this.convertArrayToString(this.productids);
-    // lấy sản phẩm trong giỏ hàng
-    this.cartService.listCartUser(2).subscribe((data: any) => {
-      const cart = data; // Dữ liệu giỏ hàng
-      //productids sẽ mất khi load lại trang . Cách xử lý lưu vào LocalStorage hoặc SessionStorage hoặc serverice
-      this.cartService.listproductIds(a).subscribe(
-        {
-          next: (products) => {
-            this.CartItems = this.productids.map((productId: number) => {
-              const product = products.find((p: { productId: number }) => p.productId == productId);
-              // Lấy số lượng từ giỏ 000 theo product_id của sản phẩm 
-              let totalQuantity = 0;
-              // Chỉ định kiểu cho item
-              cart.forEach((item: { product: { productId: number }; quantity: number }) => {
-                if (item.product.productId === productId) {
-                  totalQuantity += item.quantity;
-                }
-              });
-              return {
-                product: product!,
-                quantity: totalQuantity
-              }; // Trả về sản phẩm và số lượng
-            });
-            this.sumproductToCart();
-          }
-        }
-      );
-    }
-    )
+     this.a = this.convertArrayToString(this.productids);
+     this.listCartUser();
     this.orderForm = new FormGroup(
       {
         name: new FormControl(''),
@@ -85,25 +51,42 @@ export class PaymentComponent implements OnInit {
   }
   sumproductToCart() {
     this.total = 0;
-    this.CartItems.forEach((product: any) => {
-      this.total += product.product.price * product.quantity;
+    this.listproduct.forEach((product: any) => {
+      this.total += product.price * product.quantity;
     })
   }
-  //Viết chuwong trình mã giảm giá
   userParams: any;
   total_amount: any;
   CartItem: any[];
-  // lấy dữ liệu cá nhân
-  user_id= this.userinfo.getUserInfo().employeeId;
+  user_id= this.userinfo.getUserInfo().employee.employeeId;
+
+  listCartUser(){
+    // lấy sản phẩm trong giỏ hàng
+    this.cartService.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {
+      const cart = data; // Dữ liệu giỏ hàng
+      //productids sẽ mất khi load lại trang . Cách xử lý lưu vào LocalStorage hoặc SessionStorage hoặc serverice
+      this.cartService.listproductIds(this.a).subscribe(
+        {
+          next: (products) => {
+            this.listproduct =  products;
+               console.log("Sản phẩm", products);
+            this.sumproductToCart();
+          }
+        }
+      );
+    }
+    )
+  }
   placeorder() {
-    this.CartItem = this.CartItems.map(cartItems => ({
-      productId: cartItems.product.productId,
+this.listCartUser();
+    this.CartItem = this.listproduct.map((cartItems: { productId:any; quantity: any; }) => ({
+      productId: cartItems.productId,
       quantity: cartItems.quantity
     }));
     // lấy dữ liệu tổng tiền
     this.total_amount = this.total;
     this.userParams = {
-      user_id: this.user_id,
+      userid: this.user_id,
       total_amount: this.total_amount,
       ...this.orderForm.value,
       cartItem: this.CartItem
@@ -111,7 +94,7 @@ export class PaymentComponent implements OnInit {
     this.cartService.createorder(this.userParams).subscribe((data: any) => {
       console.log(data);
     })
-    //đặt hàng bắn thông báo đặt hàng thành công focus sang trang tình trạng đơn hàng
+
   }
   //Danh sách mã giảm giá
   listdiscount() {

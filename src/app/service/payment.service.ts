@@ -17,7 +17,7 @@ export class PaymentService {
     return this.http.post(api + '/payment', paymentDetails);
   }
   listorder(): Observable<any>{
-return this.http.get(api + '/listOrder');
+return this.http.get(api + '/orders');
   }
 
 }

@@ -28,10 +28,14 @@ import { EditproductComponent } from './editproduct/editproduct.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { EditcategoryComponent } from './editcategory/editcategory.component';
 import { OrderComponent } from './order/order.component';
+import { PaginationComponent } from '../common/pagination/pagination.component';
+import { CommonTableComponent } from '../common/common-table/common-table.component';
 
-const routes: Routes = [
+const routes: Routes = 
+[
   {
     path: '', component: AdminComponent,
+  
     children: [
       { path: '', component:ListuserComponent},
       {path:'adduser',component:AdduserComponent},
@@ -43,16 +47,19 @@ const routes: Routes = [
       {path:'listproduct/addproduct', component:AddproductComponent},
       {path:'listproduct/editproduct/:id', component:EditproductComponent},
       {path:'order', component:OrderComponent},
-      {path:'listcategory', component:ListcategoryComponent}
+      {path:'listcategory', component:ListcategoryComponent},
+         { path: '', redirectTo: '/admin', pathMatch: 'full' }
     ]
   }
 ]
 @NgModule({
   declarations: [
   ListuserComponent,
+  PaginationComponent,
   EdituserComponent,
   ListproductComponent,
   ListcategoryComponent,
+  CommonTableComponent,
   DatepickerComponent,
   AdduserComponent,
   AddproductComponent,
@@ -75,15 +82,14 @@ const routes: Routes = [
     DropdownModule,
     DividerModule,
     FormsModule,
+  
     MatSnackBarModule,
     RouterModule.forChild(routes)
   ],
-  providers: [
-    DialogService,
-    DynamicDialogRef
-  ],
+  // providers: [
+  //   DialogService,
+  //   DynamicDialogRef
+  // ],
   exports: [RouterModule]
 })
-export class AdminModule {
-// constructor(public app: UserService) {}
- }
+export class AdminModule {}

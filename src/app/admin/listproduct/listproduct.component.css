@@ -17,7 +17,7 @@
   min-width: 100px;
 }
 
-.status-active {
+/* .status-active {
   color: #28a745;
   background-color: #d4edda;
   border: 1px solid #28a745;
@@ -27,7 +27,7 @@
   color: #ffc107;
   background-color: #fff3cd;
   border: 1px solid #ffc107;
-}
+} */
 
 .status-shipping {
   color: #4CAF50;

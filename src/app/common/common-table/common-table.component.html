@@ -1,0 +1,47 @@
+<div class="table-responsive">
+  <table class="table-ds">
+    <thead>
+      <tr>
+         <th *ngIf="selectable" style="width: 0%;">
+          <input type="checkbox" [(ngModel)]="allChecked" (change)="onSelectAll(allChecked)" />
+        </th>
+        <th *ngFor="let col of columns">
+          {{ col.title }}
+        </th>
+         <th *ngIf="showActions">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+         <td *ngIf="selectable">
+           <!-- (change)="onSelectRow(row, $event.target.checked)" -->
+          <input
+            type="checkbox"
+            [checked]="selectedRows.has(row)" 
+            (change)="onSelectRow(row)"
+          
+          />
+        </td>
+        <td *ngFor="let col of columns">
+          {{ row[col.key] }}
+        </td>
+         <td *ngIf="showActions">
+          
+           <div class="action-container flex">
+                    <div class="p-element action-icon">
+                      <i class="fas fa-edit"(click)="onEdit(row)"></i>
+                    </div>
+                    <div class="p-element action-icon">
+                      <span class="fas fa-eye" (click)="onView(row)"></span>
+  
+                    </div>
+                    <div class="p-element action-icon">
+                      <span class="fas fa-trash" (click)="onDelete(row)"></span>
+                    </div>
+                  </div>
+                
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

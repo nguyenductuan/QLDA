@@ -14,28 +14,32 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private cartService: CartService,
-    private app: UserService, 
+    private app: UserService,
     private userinfo: UserinfoService) {
   }
-
   products: any;
   sum: any;
   listcart: any;
-user:any;
-  ngOnInit() {
-  this.listproduct();
-  this.user = this.userinfo.getUserInfo().name;
-   this.getCart();
+  user: any;
+  ngOnInit(): void {
+    // this.loadProducts();
+    this.loadUserInfo()
+    this.loadCartCount();
   }
-  listproduct(){
-    this.productService.listproducts().subscribe((data: any) => {
-      this.products = data;
-    })
+  private loadUserInfo(): void {
+    const userInfo = this.userinfo.getUserInfo();
+    this.user = userInfo?.name ?? '';
   }
-  getCart(){
-    this.cartService.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
-      this.listcart = data;
-      this.sum = this.listcart.length;
-    })
+  //Lấy số lượng sản phẩm trong giỏ
+  private loadCartCount():void {
+    this.cartService.cartCount$.subscribe((count: number) => {
+      this.sum = count;
+    });
   }
+  // // Danh sách sản phẩm
+  // private loadProducts(): void {
+  //   this.productService.listproducts().subscribe((data: any) => {
+  //     this.products = data;
+  //   })
+  // }
 }

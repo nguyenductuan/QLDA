@@ -21,6 +21,8 @@ export class CartComponent implements OnInit {
   allChecked: any;
   listcart: any;
   quanty: number;
+  count:any;
+  sum: any;
   constructor(private cart: CartService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
@@ -29,16 +31,18 @@ export class CartComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit() {
-    this.listCartUser();
+    this.loadCart();
     this.listdiscount();
   }
-  user = this.userinfo.getUserInfo();
+  // Thêm hàm này để load lại dữ liệu cart
+  loadCart() {
+    this.cart.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((response: any) => {
+      this.listcart = response.data;
+       this.count = this.listcart.length;
+      this.sum = this.count;
+      // Cập nhật count vào CartService
+    this.cart.updateCartCount(this.count);
 
-  //Lấy danh sách sản phẩm trong giỏ hàng của người dùng
-  listCartUser() {
-    this.cart.listCartUser(this.user.employeeId).subscribe((data: any) => {
-      this.listcart = data;
-      console.log(this.listcart);
     })
   }
   // hàm khi click chọn tất cả 
@@ -81,27 +85,33 @@ export class CartComponent implements OnInit {
       }
     });
   }
-  // Thêm hàm này để load lại dữ liệu cart
-  loadCart() {
-    this.cart.listCartUser(this.userinfo.getUserInfo().employeeId).subscribe((data: any) => {
-      this.listcart = data;
-    })
-  }
+
   increment(p: any, quantity: number, employeeId: any) {
     //update số lượng trong DB 
     this.quanty = quantity + 1;
     this.cart.updateQuantity(p,
-      this.quanty, employeeId).
-      subscribe((data: any) => {
-      })
-    this.loadCart();
+      this.quanty, employeeId).subscribe({
+    next: () => {
+      this.loadCart(); // gọi sau khi update xong
+    },
+    error: err => {
+      console.error("Lỗi cập nhật số lượng", err);
+    }
+  });
+    
   }
   decrement(p: any, quantity: number, employeeId: any) {
     this.quanty = quantity - 1;
-    this.cart.updateQuantity(p, this.quanty, employeeId).
-      subscribe((data: any) => {
-      })
-    this.loadCart();
+    if (this.quanty < 1) return; // Không cho phép số lượng nhỏ hơn 1
+    this.cart.updateQuantity(p, this.quanty, employeeId).subscribe({
+    next: () => {
+      this.loadCart(); // gọi sau khi update xong
+    },
+    error: err => {
+      console.error("Lỗi cập nhật số lượng", err);
+    }
+  });
+  
   }
   //hàm lấy danh sách mã giảm giá
   listdiscount() {
@@ -127,7 +137,7 @@ export class CartComponent implements OnInit {
             verticalPosition: 'top'
           }
           );
-          this.loadCart();// lỗi không load lại được data
+          window.location.reload();
         })
       };
     })

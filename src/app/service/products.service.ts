@@ -13,7 +13,7 @@ export class ProductsService {
 
 
   listproducts(): Observable<any> {
-    return this.http.get(api + '/product');
+    return this.http.get(api + '/products');
   }
 
   addproduct(data:any):Observable<any>{
@@ -40,7 +40,7 @@ export class ProductsService {
     return this.http.delete(api + '/delete-product/'+id);
   }
   productbyid(id:any): Observable<any>{
-  return this.http.get(api+ '/productid?productId=' +id );
+  return this.http.get(api+ '/products/' +id );
   }
     deletepeoducts(ids: any): Observable<any> {
       return this.http.post(api + '/delete-products' ,ids);

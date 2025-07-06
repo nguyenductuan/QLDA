@@ -1,0 +1,66 @@
+<nav *ngIf="totalPages >= 1" class="pagination-nav">
+  <ul class="pagination">
+    <li [class.disabled]="currentPage === 1">
+      <button (click)="changePage(1)" [disabled]="currentPage === 1">&laquo;</button>
+    </li>
+    <li [class.disabled]="currentPage === 1">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lsaquo;</button>
+    </li>
+    <li *ngFor="let page of pages" [class.active]="page === currentPage">
+      <button (click)="changePage(page)">{{ page }}</button>
+    </li>
+    <li [class.disabled]="currentPage === totalPages">
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">&rsaquo;</button>
+    </li>
+    <li [class.disabled]="currentPage === totalPages">
+      <button (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">&raquo;</button>
+    </li>
+  </ul>
+</nav>
+
+<!-- 
+  
+        <div class="paginator-container" *ngIf="totalRecords > 0">
+          <div class="paginator-left">
+            <p-dropdown [(ngModel)]="pageSize" [options]="pageSizes" (onChange)="onPageSizeChange($event)">
+            </p-dropdown>
+            <label class="paginator-label">
+              Hiển thị {{startIndex + 1}}-{{endIndex}} trên {{totalRecords}}
+            </label>
+          </div>
+          <div class="paginator-right">
+            <div class="prev-icon page-action">
+              <button class="p-element page-action_btn p-button p-component" (click)="goToFirstPage()"
+                [disabled]="currentPage === 1">
+                <i class="fas fa-angle-double-left"></i>
+              </button>
+              <button class="p-element page-action_btn p-button p-component" (click)="goToPreviousPage()"
+                [disabled]="currentPage === 1">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+            </div>
+            <div class="list-pages">
+              <div style="width:48px;">
+                <div class="form-container horizontal" style="width: 100%;">
+                  <div class="">
+                    <input pInputText [(ngModel)]="currentPage" (keyup.enter)="onInputChange($event)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-pages">
+              /{{totalPages}}
+            </div>
+            <div class="next-icon page-action">
+              <button class="p-element page-action_btn p-button p-component" (click)="goToNextPage()"
+                [disabled]="currentPage === totalPages">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button class="p-element page-action_btn p-button p-component" (click)="goToLastPage()"
+                [disabled]="currentPage === totalPages">
+                <i class="fas fa-angle-double-right"></i></button>
+            </div>
+          </div>
+        </div> -->
+
+

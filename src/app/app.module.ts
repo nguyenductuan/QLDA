@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductDetailDialogComponent } from './common/product-detail-dialog/product-detail-dialog.component';
+import { PaginationComponent } from './common/pagination/pagination.component';
+import { CommonTableComponent } from './common/common-table/common-table.component';
 
 
 

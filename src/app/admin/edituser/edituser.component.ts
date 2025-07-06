@@ -61,17 +61,14 @@ export class EdituserComponent {
   ];
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
-    console.log(this.userId);
     this.userService.getUserById(this.userId).subscribe((user:any) => {
       this.employee = user;
-      console.log(user);
       this.editUserForm.patchValue({
         ...user,
         position:user.positionId,
         role: user.roleId
       });
     });
-    
     this.positionService.listposition().subscribe((data: any) => {
       this.positionList = data;
       

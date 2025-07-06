@@ -35,7 +35,7 @@ statusOptions: any[] = [
 this.product_id =  this.route.snapshot.paramMap.get('id');
 
 
-this.category.listcategorys().subscribe(
+this.category.listcategorys(0,1).subscribe(
   {
     next:(data) => {
       this.categorylist = data;
