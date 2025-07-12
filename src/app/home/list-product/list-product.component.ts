@@ -20,10 +20,10 @@ sum: any;
    this.getCart();
   }
   listproduct(){
-    this.productService.listproducts().subscribe((data:any) =>
-    {
-      this.products = data;
-    })
+    // this.productService.listproducts().subscribe((data:any) =>
+    // {
+    //   this.products = data;
+    // })
 }
   getCart(){
     this.cart.listCartUser(this.userinfo.getUserInfo().employee.employeeId).subscribe((data: any) => {

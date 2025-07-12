@@ -15,34 +15,6 @@
     align-items: center;
     justify-content: space-between;
   }
-  
-  /* 1.breadcrumbs */
-  .breadcrumbs {
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    gap: 5px;
-    cursor: default;
-  }
-  
-  .breadcrumbs .breadcrumb-item {
-    font-size: 12px;
-    line-height: 1.125rem;
-    color: #4b5563;
-  
-  }
-  .breadcrumbs .separator {
-    width: 20px;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .separator-icon {
-    font-size: 10px;
-    color: #d1d5db;
-  }
   .flex {
     display: flex !important
   }
@@ -98,9 +70,7 @@
     height: 100%;
     background: #fff;
     border: solid 1px #cccc;
-  
   }
-  
   /* 2.1 search */
   .filter-container .filter-default {
     display: flex;

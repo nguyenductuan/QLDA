@@ -1,23 +1,17 @@
 <div style=" max-height: 100%;overflow-y: auto;">
     <div class="top-bar-header">
-        <div class="left-colum">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item cursor-default breadcrumb-route">
-              Trang chủ
-            </div>
-            <div class="separator">
-              <span class="separator-icon pi pi-chevron-right"></span>
-            </div>
-            <div class="breadcrumb-item cursor-default">
-              Sản phẩm
-            </div>
-          </div>
-          <div class="flex">
-            <div class="page-title">
-              Danh sách sản phẩm
-            </div>
-          </div>
+    <div class="left-colum">
+      <app-breadcrumbs [items]="[
+  { label: 'Trang chủ', url: '/home', icon: 'fas fa-home' },
+  { label: 'Sản phẩm' }
+]">
+      </app-breadcrumbs>
+      <div class="flex">
+        <div class="page-title">
+          Sản phẩm
         </div>
+      </div>
+    </div>
         <div class="right-column">
      
           <div class="action-header">
@@ -37,133 +31,12 @@
           </div>
         </div>
       </div>
-      <div class="table-container">
-        <table class="table-ds">
-          <thead>
-            <tr class="ng-star-inserted">
-              <th>
-                <div>
-                  <input type="checkbox" (change)="toggleAll($event)" [checked]="allChecked">
-                </div>
-              </th>
-              <th>
-                <div>
-                  <span class="text-line-table">Tên sản phẩm</span>
-                </div>
-              </th>
-              <th>
-                <div>
-                  <span class="text-line-table">Nhóm sản phẩm</span>
-                </div>
-              </th>
-              <th>
-                <div>
-                  <span class="text-line-table">Giá</span>
-                </div>
-              </th>
-  
-              <th>
-                <div>
-                  <span class="text-line-table">Số lượng</span>
-                </div>
-              </th>
-              <th>
-                <div>
-                  <span class="text-line-table">Ngày tạo</span>
-                </div>
-              </th>
-              <th>
-                <div>
-                  <span class="text-line-table">Trạng thái</span>
-                </div>
-              </th>
-             
-              <th>
-                <div>
-                  <span class="text-line-table">Thao tác</span>
-                </div>
-              </th>
-            </tr>
-          </thead>
-     
-          <tbody *ngIf="countproduct > 0; else noData">
-            <tr *ngFor="let p of productList">
-              <td>
-                <input type="checkbox" [(ngModel)]="p.selected" (change)="checkIfAllSelected()">
-              </td>
-              <td class="ng-star-inserted">{{p.name}}</td>
-              <td class="ng-star-inserted">{{p.category.name}}</td>
-              <td class="ng-star-inserted">{{formatMoney(p.price)}}</td>
-  
-              <td class="ng-star-inserted">{{p.quantity}}</td>
-              <td class="ng-star-inserted">{{p.createdate | date:'dd/MM/yyyy' }}</td>
-              <td class="ng-star-inserted" [ngClass]="getStatusClass(p.status)" class="status-badge">
-               {{p.status ==1 ? 'Hoạt động': 'Dừng hoạt động' }}
-              </td>
-              <td class="ng-star-inserted">
-                <div class="row-wrapper">      
-                  <div class="action-container flex ng-star-inserted">
-                    <div class="p-element action-icon ng-star-inserted">
-                      <i class="fas fa-edit" routerLink="editproduct/{{p.productId}}"></i>
-                    </div>
-                    <div class="p-element action-icon ng-star-inserted">
-                      <span class="fas fa-eye" (click)="openProductDetailDialog(p)"></span>
-  
-                    </div>
-                    <div class="p-element action-icon ng-star-inserted">
-                      <span class="fas fa-trash" (click)="deleteproduct(p.productId)"></span>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-         <ng-template #noData>
-            <p>Không có dữ liệu</p>
-          </ng-template>
-        </table>
-  <!-- code phân trang -->
-        <!-- <div class="paginator-container" *ngIf="totalRecords > 0">
-          <div class="paginator-left">
-            <p-dropdown [(ngModel)]="pageSize" [options]="pageSizes" (onChange)="onPageSizeChange($event)">
-            </p-dropdown>
-            <label class="paginator-label">
-              Hiển thị {{startIndex + 1}}-{{endIndex}} trên {{totalRecords}}
-            </label>
-          </div>
-          <div class="paginator-right">
-            <div class="prev-icon page-action">
-              <button class="p-element page-action_btn p-button p-component" (click)="goToFirstPage()"
-                [disabled]="currentPage === 1">
-                <i class="fas fa-angle-double-left"></i>
-              </button>
-              <button class="p-element page-action_btn p-button p-component" (click)="goToPreviousPage()"
-                [disabled]="currentPage === 1">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-            </div>
-            <div class="list-pages">
-              <div style="width:48px;">
-                <div class="form-container horizontal" style="width: 100%;">
-                  <div class="">
-                    <input pInputText [(ngModel)]="currentPage" (keyup.enter)="onInputChange($event)" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="max-pages">
-              /{{totalPages}}
-            </div>
-            <div class="next-icon page-action">
-              <button class="p-element page-action_btn p-button p-component" (click)="goToNextPage()"
-                [disabled]="currentPage === totalPages">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-              <button class="p-element page-action_btn p-button p-component" (click)="goToLastPage()"
-                [disabled]="currentPage === totalPages">
-                <i class="fas fa-angle-double-right"></i></button>
-            </div>
-          </div>
-        </div> -->
-      </div>
+
+      <app-common-table [columns]="columns" [data]="data" [showActions]="true" [selectable]="true" (edit)="onEdit($event)"
+    (view)="onView($event)" (delete)="onDelete($event)"
+    (selectionChange)="onSelectionChange($event)"></app-common-table>
+<!--  Phân trang sử dụng component chung -->
+<app-pagination [totalItems]="totalItems" [pageSize]="pageSize" [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)">
+</app-pagination>
 </div>

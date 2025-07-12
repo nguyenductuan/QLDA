@@ -1,54 +1,41 @@
 <div style=" max-height: 100%;overflow-y: auto;">
-    <div class="top-bar-header">
-        <div class="left-colum">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item cursor-default breadcrumb-route">
-              Trang chủ
-            </div>
-            <div class="separator">
-              <span class="separator-icon pi pi-chevron-right"></span>
-            </div>
-            <div class="breadcrumb-item cursor-default">
-              Người dùng
-            </div>
-          </div>
-          <div class="flex">
-            <div class="page-title">
-              Danh sách cá nhân
-            </div>
-          </div>
-        </div>
-        <div class="right-column">
-     
-          <div class="action-header">
-            <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
-              type="button">
-              <span class="fas fa-file-export">
-              </span>
-            </button>
-    
-            <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
-              type="button">
-              <span class="fas fa-sync-alt ">
-              </span>
-            </button>
-            <button class="p-buttons button" [routerLink]="'addproduct'">Thêm mới</button>
-          </div>
+  <div class="top-bar-header">
+    <div class="left-colum">
+      <app-breadcrumbs [items]="[
+  { label: 'Trang chủ', url: '/home', icon: 'fas fa-home' },
+  { label: 'Danh mục sản phẩm' }
+]">
+      </app-breadcrumbs>
+      <div class="flex">
+        <div class="page-title">
+          Danh mục sản phẩm
         </div>
       </div>
-<!-- Sử dụng component chung để hiển thị bảng -->
-<app-common-table [columns]="columns" [data]="data" 
-  [showActions]="true"
-   [selectable]="true"
-  (edit)="onEdit($event)"
-  (view)="onView($event)"
-  (delete)="onDelete($event)"
-  (selectionChange)="onSelectionChange($event)"></app-common-table>
+    </div>
+    <div class="right-column">
+      <div class="action-header">
+        <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+          type="button">
+          <span class="fas fa-file-export">
+          </span>
+        </button>
+
+        <button class="p-ripple p-element p-button p-component p-button-icon-only p-button-secondary p-button-outlined"
+          type="button">
+          <span class="fas fa-sync-alt ">
+          </span>
+        </button>
+        <button class="btn btn-danger" *ngIf="showDeleteButton" (click)="deleteSelected()">Xóa</button>
+        <button class="p-buttons button" [routerLink]="'addproduct'">Thêm mới</button>
+      </div>
+    </div>
+  </div>
+  <!-- Sử dụng component chung để hiển thị bảng -->
+  <app-common-table [columns]="columns" [data]="data" [showActions]="true" [selectable]="true" (edit)="onEdit($event)"
+    (view)="onView($event)" (delete)="onDelete($event)"
+    (selectionChange)="onSelectionChange($event)"></app-common-table>
 </div>
 <!--  Phân trang sử dụng component chung -->
-<app-pagination
-  [totalItems]="totalItems"
-  [pageSize]="pageSize"
-  [currentPage]="currentPage"
+<app-pagination [totalItems]="totalItems" [pageSize]="pageSize" [currentPage]="currentPage"
   (pageChange)="onPageChange($event)">
 </app-pagination>

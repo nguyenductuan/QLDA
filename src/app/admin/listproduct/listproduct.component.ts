@@ -18,43 +18,93 @@ constructor(private products: ProductsService,
   public dialog: MatDialog
 ){}
 productList:any; 
+selectedCategoryIds:any;
 countproduct:any;
+columns: any;
+data: any[] = [];
 allChecked: boolean = false;
+pageSize = 5;  // Số bản ghi/trang
+currentPage = 1; // Trang hiện tại
 showDeleteButton = false;
 formatMoney(value: number): string {
   return value.toLocaleString('en-US'); // Dùng 'en-US' để phân cách hàng nghìn bằng dấu phẩy
 }
-ngOnInit(){
-this.products.listproducts().subscribe({
-  next: (data) => {
-    console.log('Dữ liệu nhận được:', data);
-    this.productList = data;
-    this.countproduct= data.length;
-  },
-  error: (err) => {
-    console.error('Lỗi khi gọi API:', err);
-  },
-})
+get totalItems(): number {
+return this.countproduct || 0;
+  }
+getlistProducts(){
+  this.products.listproducts(this.currentPage - 1,this.pageSize).subscribe({
+    next: (response) => {
+      this.productList = response.data;
+      console.log("A",this.productList);
+      this.countproduct = response.pageInfo.totalCount; // Lấy tổng số bản ghi từ response
+      this.columns = [
+        { title: 'Tên sản phẩm', key: 'name' },
+        { title: 'Nhóm sản phẩm', key: 'categoryName' }, // Sửa key thành 'categoryName'
+        { title: 'Giá', key: 'price' },
+        { title: 'Số lượng', key: 'quantity' },
+        { title: 'Ngày tạo', key: 'createdate' },
+        { title: 'Trạng thái', key: 'status' },
+      ];
+      this.data = this.productList.map((item: any) => {
+        const formatDate = (dateStr: string | null) => {
+          if (!dateStr) return dateStr;
+          const [year, month, day] = dateStr.split("-");
+          return `${day}/${month}/${year}`;
+        };
+
+        const convertStatus = (status: string | number) => {
+          if (status === "0" || status === 0) return "Dừng hoạt động";
+          if (status === "1" || status === 1) return "Hoạt động";
+          return status;
+        };
+        return {
+          ...item,
+           categoryName: item.category?.name || '', // lấy tên nhóm sản phẩm
+          createdate: formatDate(item.createdate),
+          status: convertStatus(item.status),
+        };
+      });
+    },
+    error: (err) => {
+      console.log(err)
+    }
+  });
 }
+ngOnInit(){
+  this.getlistProducts();
+}
+
+onPageChange(page: number) {
+    this.currentPage = page;
+   this.getlistProducts();
+  }
+  // -----------Xử lý hành động---------
+onEdit(row: any) {
+    console.log('Sửa', row);
+  }
+onDelete(row: any) {
+    this.deleteproduct(row.id);
+  }
+onView(row: any) {
+    console.log('Xem chi tiết', row);
+  }
+openCategoryDialog(event: any) {
+  }
+
+ onSelectionChange(selectedRows: any[]) {
+   // console.log('Các dòng được chọn:', selectedRows);
+    this.selectedCategoryIds = selectedRows.map((row: any) => row.categoryId);
+     console.log('Danh sách category id:', this.selectedCategoryIds);
+  
+    if (this.selectedCategoryIds.length === 0) {
+      this.showDeleteButton = false;
+    }else{
+      this.showDeleteButton = true;
+    }
+  }
 // Hàm cập nhật danh sách sản phẩm
 updatekistproduct(){
-
-}
-  // Biến lưu trữ trạng thái chọn tất cả
-  toggleAll(event: any) {
-    const isChecked = event.target.checked;
-    this.productList.forEach((p: any) =>p.selected = isChecked);
-    this.allChecked = isChecked;
-    this.showDeleteButton = this.productList.some((item: { selected: any; }) => item.selected);
-
-  }
-
-getStatusClass(status: number): string {
-  if (status === 1) {
-    return 'status-active';
-  } else {
-    return 'status-inactive';
-  }
 }
   deleteSelected(){
     const selectedIds = this.productList
@@ -78,12 +128,7 @@ getStatusClass(status: number): string {
     })
 
   }
-  // Hàm kiểm tra xem tất cả người dùng đã được chọn hay chưa
-  checkIfAllSelected() {
-    this.allChecked = this.productList.every((p: any) => p.selected);
-    this.showDeleteButton = this.productList.some((item: { selected: any; }) => item.selected);
- 
-  }
+
   openProductDetailDialog(p: any) {
     const dialogRef = this.dialog.open(ProductDetailDialogComponent, {
       width: '70%',

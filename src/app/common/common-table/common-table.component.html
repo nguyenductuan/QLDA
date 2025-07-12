@@ -14,22 +14,17 @@
     <tbody>
       <tr *ngFor="let row of data">
          <td *ngIf="selectable">
-           <!-- (change)="onSelectRow(row, $event.target.checked)" -->
-          <input
-            type="checkbox"
-            [checked]="selectedRows.has(row)" 
-            (change)="onSelectRow(row)"
-          
-          />
+          <input type="checkbox"
+            [checked]="selectedRows.has(row)"
+        (change)="onSelectRow(row,$event)"/>
         </td>
         <td *ngFor="let col of columns">
           {{ row[col.key] }}
         </td>
          <td *ngIf="showActions">
-          
            <div class="action-container flex">
                     <div class="p-element action-icon">
-                      <i class="fas fa-edit"(click)="onEdit(row)"></i>
+                      <i class="fas fa-edit" (click)="onEdit(row)"></i>
                     </div>
                     <div class="p-element action-icon">
                       <span class="fas fa-eye" (click)="onView(row)"></span>
