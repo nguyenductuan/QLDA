@@ -18,6 +18,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ProductDetailDialogComponent } from './common/product-detail-dialog/product-detail-dialog.component';
 import { PaginationComponent } from './common/pagination/pagination.component';
 import { CommonTableComponent } from './common/common-table/common-table.component';
+import { BreadcrumbsComponent } from './common/breadcrumbs/breadcrumbs.component';
 
 
 
@@ -27,6 +28,7 @@ import { CommonTableComponent } from './common/common-table/common-table.compone
   ],
   imports: [
     CommonModule,
+    // FormsModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

@@ -19,4 +19,7 @@ export class CategoryService {
     delete(id:any): Observable<any> {
       return this.http.delete(api + '/delete-category/'+id);
     }
+    deleteSelectedCategories(ids: any): Observable<any> {
+    return this.http.post(api + '/categories/delete-many',ids);
+        }
 }

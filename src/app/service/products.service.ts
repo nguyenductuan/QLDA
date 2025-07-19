@@ -12,9 +12,13 @@ export class ProductsService {
   constructor( private http: HttpClient, public router:Router) {}
 
 
-  listproducts(): Observable<any> {
-    return this.http.get(api + '/products');
-  }
+  // listproducts(): Observable<any> {
+  //   return this.http.get(api + '/products');
+  // }
+    listproducts(pageNo:any,pageSize:any): Observable<any> {
+      const params = { pageNo: pageNo, pageSize: pageSize };
+      return this.http.get(api + '/products', { params });
+    }
 
   addproduct(data:any):Observable<any>{
     const formData = new FormData();

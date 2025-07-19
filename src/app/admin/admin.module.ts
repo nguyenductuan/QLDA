@@ -30,6 +30,7 @@ import { EditcategoryComponent } from './editcategory/editcategory.component';
 import { OrderComponent } from './order/order.component';
 import { PaginationComponent } from '../common/pagination/pagination.component';
 import { CommonTableComponent } from '../common/common-table/common-table.component';
+import { BreadcrumbsComponent } from '../common/breadcrumbs/breadcrumbs.component';
 
 const routes: Routes = 
 [
@@ -55,6 +56,7 @@ const routes: Routes =
 @NgModule({
   declarations: [
   ListuserComponent,
+  BreadcrumbsComponent,
   PaginationComponent,
   EdituserComponent,
   ListproductComponent,
