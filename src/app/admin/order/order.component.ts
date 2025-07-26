@@ -12,57 +12,51 @@ export class OrderComponent implements OnInit {
 listorder:any;
 searchTerm = '';
 columns: any;
+pageSize = 5;  // Số bản ghi/trang
+currentPage = 1; // Trang hiện tại
 data: any[] = [];
 selectedStatus = '';
   ngOnInit(): void {
 this.fetchOrders();
  }
+ get totalItems(): number {
+return 10;
+  }
+  onPageChange(page: number) {
+    this.currentPage = page;
+   this.fetchOrders();
+  }
  // Lấy danh sách order
- private fetchOrders(): void {
-  this.order.listorder().subscribe({
+fetchOrders() {
+  this.order.listorder(this.currentPage - 1,this.pageSize).subscribe({
     next: (response) => {
-      this.listorder = response;
+      this.listorder = response.data;
       console.log('Danh sách đơn hàng:', this.listorder);
        this.columns = [
-        { title: 'Tên sản phẩm', key: 'name' },
-        { title: 'Nhóm sản phẩm', key: 'categoryName' }, // Sửa key thành 'categoryName'
-        { title: 'Giá', key: 'price' },
-        { title: 'Số lượng', key: 'quantity' },
-        { title: 'Ngày tạo', key: 'createdate' },
-        { title: 'Trạng thái', key: 'status' },
+        { title: 'Mã đơn', key: 'orderId' },
+        { title: 'Khách hàng', key: 'name' },
+        { title: 'Ngày', key: 'createdate' },
+        { title: 'Trạng thái', key: 'payment_status' },
+        { title: 'Tổng tiền', key: 'total_amount' },
+       
       ];
-      this.listorder = this.listorder.map((item: any) => {
+      this.data = this.listorder.map((item: any) => {
         const formatDate = (dateStr: string | null) => {
           if (!dateStr) return dateStr;
           const [year, month, day] = dateStr.split("-");
           return `${day}/${month}/${year}`;
         };
-
-        const convertStatus = (status: string | number) => {
-          if (status === "0" || status === 0) return "Dừng hoạt động";
-          if (status === "1" || status === 1) return "Hoạt động";
-          return status;
-        };
         return {
           ...item,
-          categoryName: item.category?.name || '', // lấy tên nhóm sản phẩm
           createdate: formatDate(item.createdate),
-          status: convertStatus(item.status),
         };
+       
       });
     },
     error: (error) => {
       console.error('Lỗi khi lấy danh sách đơn hàng:', error);
     }
   });
-}
-
-get filteredOrders() {
-  return this.listorder.filter((listorder:any) =>
-    (listorder.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-    listorder.orderId.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-    (this.selectedStatus === '' || listorder.payment_status === this.selectedStatus)
-  );
 }
 onEdit(row: any) {
     console.log('Sửa', row);

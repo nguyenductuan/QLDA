@@ -16,8 +16,9 @@ export class PaymentService {
    processPayment(paymentDetails: any): Observable<any> {
     return this.http.post(api + '/payment', paymentDetails);
   }
-  listorder(): Observable<any>{
-return this.http.get(api + '/orders');
+  listorder(pageNo:any,pageSize:any): Observable<any> {
+        const params = { pageNo: pageNo, pageSize: pageSize };
+        return this.http.get(api + '/orders', { params });
   }
 
 }

@@ -37,7 +37,7 @@ getlistProducts(){
     next: (response) => {
       this.productList = response.data;
       console.log("A",this.productList);
-      this.countproduct = response.pageInfo.totalCount; // Lấy tổng số bản ghi từ response
+      //this.countproduct = response.pageInfo.totalCount; // Lấy tổng số bản ghi từ response
       this.columns = [
         { title: 'Tên sản phẩm', key: 'name' },
         { title: 'Nhóm sản phẩm', key: 'categoryName' }, // Sửa key thành 'categoryName'

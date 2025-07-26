@@ -1,52 +1,13 @@
 <div class="p-4 space-y-4">
     <h2 class="text-2xl font-bold">Quản lý Đơn hàng</h2>
-  
-    <div class="flex flex-col sm:flex-row items-center gap-4">
-      <input
-        type="text"
-        placeholder="Tìm kiếm theo tên hoặc mã đơn hàng..."
-        [(ngModel)]="searchTerm"
-        class="border rounded-xl p-2 w-full sm:w-1/3"
-      />
-  
-      <select
-        [(ngModel)]="selectedStatus"
-        class="border rounded-xl p-2 w-full sm:w-1/4">
-        <option value="">Tất cả trạng thái</option>
-        <option value="Đang xử lý">Đang xử lý</option>
-        <option value="Đã giao">Đã giao</option>
-        <option value="Đã huỷ">Đã huỷ</option>
-      </select>
-    </div>
-         <!-- <app-common-table [columns]="columns" [data]="data" [showActions]="true" [selectable]="true" (edit)="onEdit($event)"
+
+           <app-common-table [columns]="columns" [data]="data" [showActions]="true" [selectable]="true" (edit)="onEdit($event)"
     (view)="onView($event)" (delete)="onDelete($event)"
-    (selectionChange)="onSelectionChange($event)"></app-common-table> -->
+    (selectionChange)="onSelectionChange($event)"></app-common-table>
+<!--  Phân trang sử dụng component chung -->
+<app-pagination [totalItems]="totalItems" [pageSize]="pageSize" [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)">
+</app-pagination>
     
-    <table class="w-full border border-gray-300 rounded-xl overflow-hidden">
-      <thead class="bg-gray-100">
-        <tr>
-          <th class="p-3 text-left">Mã đơn</th>
-          <th class="p-3 text-left">Khách hàng</th>
-          <th class="p-3 text-left">Ngày</th>
-          <th class="p-3 text-left">Trạng thái</th>
-          <th class="p-3 text-left">Tổng tiền</th>
-          <th class="p-3 text-left">Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of filteredOrders" class="border-t">
-          <td class="p-3">{{ order.orderId }}</td>
-          <td class="p-3">{{ order.name }}</td>
-          <td class="p-3">{{ order.createdate }}</td>
-          <td class="p-3">{{ order.payment_status }}</td>
-          <td class="p-3">{{ order.total_amount }}</td>
-          <td class="p-3 space-x-2">
-            <button class="text-blue-500 hover:underline">Chi tiết</button>
-            <button class="text-yellow-500 hover:underline">Sửa</button>
-            <button class="text-red-500 hover:underline" (click)="deleteOrder(order.id)">Xoá</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
   
